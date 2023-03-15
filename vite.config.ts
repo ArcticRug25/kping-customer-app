@@ -2,43 +2,43 @@ import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import path from 'path'
 import Unocss from 'unocss/vite'
+import { presetAttributify, presetIcons, presetUno } from 'unocss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     uni(),
     // https://github.com/antfu/unocss
-    Unocss()
+    process.env.UNI_COMPILER !== 'nvue' ? Unocss() : undefined,
   ],
   server: {
     // port: 8080,
     host: '0.0.0.0',
     proxy: {
       '/api/': {
-        target:
-          'https://service-rbji0bev-1256505457.cd.apigw.tencentcs.com/release',
+        target: 'https://service-rbji0bev-1256505457.cd.apigw.tencentcs.com/release',
         changeOrigin: true,
-        rewrite: (p) => p.replace(/^\/api/, '')
+        rewrite: (p) => p.replace(/^\/api/, ''),
       },
       '/api-prod/': {
         target: 'http://localhost:3001',
         changeOrigin: true,
-        rewrite: (p) => p.replace(/^\/api-prod/, '')
-      }
-    }
+        rewrite: (p) => p.replace(/^\/api-prod/, ''),
+      },
+    },
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@components': path.resolve(__dirname, './src/components')
-    }
+      '@components': path.resolve(__dirname, './src/components'),
+    },
   },
   css: {
     // 配置`scss`和`less`全局变量
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/styles/vars/_base.scss";'
-      }
-    }
-  }
+        additionalData: '@import "@/styles/vars/_base.scss";',
+      },
+    },
+  },
 })

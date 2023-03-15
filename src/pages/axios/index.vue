@@ -17,14 +17,14 @@ const getCode = () => {
     .then((v) => {
       uni.showToast({
         title: `${v.num}`,
-        icon: 'success'
+        icon: 'success',
       })
     })
     .catch((err) => {
       console.log(err)
       uni.showToast({
         title: '获取验证码失败',
-        icon: 'error'
+        icon: 'error',
       })
     })
 }

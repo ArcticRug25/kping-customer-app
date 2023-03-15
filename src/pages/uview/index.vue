@@ -1,95 +1,35 @@
 <template>
   <tm-app>
-    <view class="flex flex-col flex-col-top-center">
-      <tm-waterfall ref="wall" :width="718">
-        <tm-waterfall-item
-          :img="item.img"
-          v-for="(item, index) in imglist"
-          :key="index"
-        >
-          <view class="pt-1 pb-1 px-1">
-            <tm-text :label="item.text" _class="text-overflow-2"></tm-text>
-            <view class="flex flex-row flex-row-bottom-start mt-1">
-              <tm-text color="orange" :font-size="24" label="¥"></tm-text>
-              <tm-text
-                color="orange"
-                _class="px-1"
-                :font-size="36"
-                :label="item.price"
-              ></tm-text>
-              <tm-text color="grey" :font-size="24" :label="item.num"></tm-text>
-            </view>
-          </view>
-        </tm-waterfall-item>
-      </tm-waterfall>
-    </view>
+    <tm-sheet>
+      <tm-text :fontSize="24" _class="font-weight-b" label="基础属性,更多玩法请前往文档。"></tm-text>
+      <tm-divider></tm-divider>
+      <tm-skeleton></tm-skeleton>
+    </tm-sheet>
+    <tm-sheet>
+      <tm-text :fontSize="24" _class="font-weight-b" label="类型分为：line ,rect,card,chat,"></tm-text>
+      <tm-divider></tm-divider>
+      <tm-skeleton model="chat"></tm-skeleton>
+    </tm-sheet>
+    <tm-sheet>
+      <tm-text :fontSize="24" _class="font-weight-b" label="也可以自定义骨架布局"></tm-text>
+      <tm-divider></tm-divider>
+      <tm-skeleton-line :height="50"></tm-skeleton-line>
+      <tm-skeleton-line :height="50"></tm-skeleton-line>
+      <view style="width: 300rpx">
+        <tm-skeleton-line :height="50"></tm-skeleton-line>
+      </view>
+    </tm-sheet>
   </tm-app>
 </template>
 <script lang="ts" setup>
-import { nextTick, ref } from 'vue'
-import { onShow, onLoad } from '@dcloudio/uni-app'
+import { ref } from 'vue'
 import tmApp from '@/tmui/components/tm-app/tm-app.vue'
-import tmSheet from '@/tmui/components/tm-sheet/tm-sheet.vue'
-import tmText from '@/tmui/components/tm-text/tm-text.vue'
-import tmWaterfall from '@/tmui/components/tm-waterfall/tm-waterfall.vue'
-import tmWaterfallItem from '@/tmui/components/tm-waterfall-item/tm-waterfall-item.vue'
 import tmDivider from '@/tmui/components/tm-divider/tm-divider.vue'
+import tmSheet from '@/tmui/components/tm-sheet/tm-sheet.vue'
+import tmSkeletonLine from '@/tmui/components/tm-skeleton-line/tm-skeleton-line.vue'
+import tmSkeleton from '@/tmui/components/tm-skeleton/tm-skeleton.vue'
+import tmText from '@/tmui/components/tm-text/tm-text.vue'
 
-const wall = ref<InstanceType<typeof tmWaterfall> | null>(null)
-const imglist = ref([
-  {
-    img: 'https://gw.alicdn.com/bao/uploaded/i2/1848622920/O1CN018zBHJ91XRPJ4bHW78_!!0-item_pic.jpg_320x320q90.jpg',
-    text: '杨大爷麻辣香肠腊肠500克四川特产烟熏肉农家自制川味烤腊肉辣肠',
-    price: '49',
-    num: '3000+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/imgextra/i4/2207613550143/O1CN01hPpOvy1CvXQdlZLeC_!!2207613550143-0-alimamacc.jpg_q90.jpg',
-    text: '',
-    price: '200',
-    num: '3000+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/bao/uploaded/i4/14498052/O1CN01pa6ScB29LrgfkRp8V_!!14498052.jpg_320x320q90.jpg',
-    text: '带盖 酸奶杯一次性塑料布丁杯胖胖pp果冻杯慕斯甜品杯双皮奶100套',
-    price: '12.8',
-    num: '1500+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/bao/uploaded/i4/14498052/O1CN01pa6ScB29LrgfkRp8V_!!14498052.jpg_320x320q90.jpg',
-    text: '带盖 酸奶杯一次性塑料布丁杯胖胖pp果冻杯慕斯甜品杯双皮奶100套',
-    price: '12.8',
-    num: '1500+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/bao/uploaded/i4/1026973813/O1CN014Kirba1e2OrHg7gwN_!!1026973813.jpg_320x320q90.jpg',
-    text: '带盖 酸奶杯一次性塑料布丁杯胖胖pp果冻杯慕斯甜品杯双皮奶100套',
-    price: '12.8',
-    num: '1500+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/imgextra/i3/23844911/O1CN01N1UxMS1m9Hs6gGu6E_!!23844911-0-alimamacc.jpg',
-    text: '',
-    price: '200',
-    num: '3000+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/bao/uploaded/i4/2418392409/O1CN01zT4JbA1TfMoU30Uub_!!2418392409.jpg_320x320q90.jpg',
-    text: '50枚挂耳咖啡滤袋日本材质手冲咖啡滤纸咖啡粉滤袋挂耳咖啡袋包邮',
-    price: '12.8',
-    num: '1500+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/bao/uploaded/i2/6000000001207/O1CN016TztFg1Kmqqrtarb0_!!6000000001207-0-picassoopen.jpg_320x320q90.jpg',
-    text: '带盖 酸奶杯一次性塑料布丁杯胖胖pp果冻杯慕斯甜品杯双皮奶100套',
-    price: '12.8',
-    num: '1500+人购买'
-  },
-  {
-    img: 'https://gw.alicdn.com/bao/uploaded/i3/2200531292142/O1CN01gFUdOw1Rh4vjN44sB_!!0-item_pic.jpg_320x320q90.jpg',
-    text: '带盖 酸奶杯一次性塑料布丁杯胖胖pp果冻杯慕斯甜品杯双皮奶100套',
-    price: '12.8',
-    num: '1500+人购买'
-  }
-])
+// const { proxy } = getCurrentInstance()
+const load = ref(true)
 </script>
