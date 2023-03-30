@@ -24,3 +24,6 @@ yarn-error.log*
 *.sw*
 .hbuilderx
 src/tmui
+
+typings/auto-components.d.ts
+typings/auto-imports.d.ts

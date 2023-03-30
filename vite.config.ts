@@ -1,8 +1,10 @@
-import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import path from 'path'
 import Unocss from 'unocss/vite'
-import { presetAttributify, presetIcons, presetUno } from 'unocss'
+import { defineConfig } from 'vite'
+import DefineOptions from 'unplugin-vue-define-options/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +12,16 @@ export default defineConfig({
     uni(),
     // https://github.com/antfu/unocss
     process.env.UNI_COMPILER !== 'nvue' ? Unocss() : undefined,
+    DefineOptions(),
+    AutoImport({
+      imports: ['vue', '@vueuse/core'],
+      dts: 'typings/auto-imports.d.ts',
+    }),
+    Components({
+      extensions: ['vue'],
+      dirs: [],
+      dts: 'typings/auto-components.d.ts',
+    }),
   ],
   server: {
     // port: 8080,

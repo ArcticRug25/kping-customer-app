@@ -1,53 +1,134 @@
 <template>
   <tm-app ref="appRef">
-    <view class="index-page">
-      <Hello />
-      <UnoCss />
-      <text class="h2"> 查看其它页面示例↓ </text>
-      <view k-w-50 k-h-50 class="i-bi-basket k-animate-swing"></view>
-      <view>
-        <navigator v-for="(v, idx) in pages" :key="idx" :url="v.url">{{ v.title }}</navigator>
+    <IndexHeader :isDark="isDark" />
+    <view
+      class="index-header k-pt-safe k-relative k-overflow-hidden k-w-100vw k-h-180"
+      :style="{ height: listimg.length ? '560rpx' : '180rpx' }">
+      <!-- 背景图 -->
+      <view class="header-bg-img k-absolute k-w-full k-h-full k-top-0 k-overflow-hidden">
+        <!-- #ifdef APP-PLUS  -->
+        <img
+          class="k-w-full k-h-full k-scale-[1.5]"
+          src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/18984202211231016453160.jpg" />
+        <!-- #endif  -->
+        <!-- #ifdef H5 -->
+        <img class="k-w-full k-h-full k-scale-[1.5]" src="/static/images/IMG_4434.jpg" />
+        <!-- #endif -->
+      </view>
+      <!-- 轮播图 -->
+      <view v-if="listimg.length" class="header-carousel k-box-border k-mt-[130rpx]">
+        <tm-carousel
+          :height="400"
+          :duration="1200"
+          :autoplay="false"
+          model="dot"
+          class="carousel"
+          :list="listimg"></tm-carousel>
       </view>
     </view>
+    <!-- 导航栏 -->
+    <view class="k-center k-bg-white k-h-180">
+      <view v-for="(item, index) in indexNavData" :key="index" class="k-center k-flex-col k-flex-1">
+        <view class="k-center k-rounded-50 k-w-90 k-h-90 k-shadow-lg" :style="{ background: item.color }">
+          <view :class="item.icon" class="k-text-white k-text-xl"></view>
+        </view>
+        <text class="k-text-c2 k-text-xs k-mt-2">{{ item.name }}</text>
+      </view>
+    </view>
+    <!-- 广告图 -->
+    <IndexBanner />
+    <!-- 商家列表 -->
+    <IndexMerchant />
   </tm-app>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { onPageScroll } from '@dcloudio/uni-app'
 import tmApp from '@/tmui/components/tm-app/tm-app.vue'
-import Hello from '@/components/hello/index.vue'
-import UnoCss from '@/components/unocss/index.vue'
+import tmCarousel from '@/tmui/components/tm-carousel/tm-carousel.vue'
+import IndexBanner from './component/index-banner.vue'
+import IndexHeader from './component/index-header.vue'
+import IndexMerchant from './component/index-merchant.vue'
 
-const pages = reactive([
+const listimg = [
+  'https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/18984202211231016453160.jpg',
+  'https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/18984202211231016453160.jpg',
+  'https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/18984202211231016453160.jpg',
+  'https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/18984202211231016453160.jpg',
+]
+
+const indexNavData = [
   {
-    title: 'Pinia Demo',
-    url: '/pages/pinia/index',
+    name: 'Charging',
+    icon: 'i-bi-lightning-charge-fill',
+    path: '',
+    color: 'linear-gradient(180deg, #f3afad 0%, #ee7571 100%)',
   },
   {
-    title: 'Axios Demo',
-    url: '/pages/axios/index',
+    name: 'Street View',
+    icon: 'i-bi-camera-fill',
+    path: '',
+    color: 'linear-gradient(180deg, #F6C89B 0%, #F19A56 100%)',
   },
   {
-    title: 'uView Demo',
-    url: '/pages/uview/index',
+    name: 'Vouchers',
+    icon: 'i-bi-ticket-detailed-fill',
+    path: '',
+    color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
   },
   {
-    title: 'UnoCSS Demo',
-    url: '/pages/unocss/index',
+    name: 'F&B',
+    icon: 'i-bi-handbag-fill',
+    path: '',
+    color: 'linear-gradient(180deg, #FAE19E 0%, #F4BC5D 100%)',
   },
-])
+]
+
+const { statusBarHeight } = uni.$tm.u.getWindow()
+const isDark = ref(false)
+onPageScroll(({ scrollTop }) => {
+  if (scrollTop + statusBarHeight >= uni.$tm.u.topx(180)) {
+    isDark.value = true
+  } else {
+    isDark.value = false
+  }
+})
+
+watch(isDark, (val) => {
+  if (plus.os.name === 'iOS') {
+    if (val) {
+      plus.navigator.setStatusBarStyle('dark')
+    } else {
+      plus.navigator.setStatusBarStyle('light')
+    }
+  } else if (plus.os.name === 'Android') {
+    if (val) {
+      plus.navigator.setStatusBarBackground('#fff')
+    } else {
+      plus.navigator.setStatusBarBackground('#000')
+    }
+  }
+})
 </script>
 
-<style scoped>
-.index-page {
-  font-style: normal;
-  text-align: center;
-}
-.h2 {
-  color: green;
-  font-size: 50rpx;
-}
-navigator {
-  color: #1e80ff;
+<style lang="scss" scoped>
+.index-header {
+  .header-bg-img {
+    filter: blur(0);
+
+    img {
+      filter: blur(30rpx);
+    }
+  }
+
+  .carousel {
+    ::v-deep .uni-swiper-slide-frame {
+      div {
+        width: 90%;
+        border-radius: 10rpx;
+        margin: 0 auto;
+      }
+    }
+  }
 }
 </style>

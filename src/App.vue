@@ -31,9 +31,16 @@ body.pages-index-index uni-page-body,
 body {
   padding-bottom: 0 !important;
 }
-text {
-  font-family: 'sans-serif';
-}
 
+/* text {
+  font-family: 'sans-serif';
+} */
+
+/* :root {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !important;
+} */
+:root {
+  font-family: Arial, sans-serif;
+}
 /* #endif */
 </style>
