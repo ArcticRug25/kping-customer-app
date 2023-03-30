@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { onPageScroll } from '@dcloudio/uni-app'
+import { onLoad, onPageScroll } from '@dcloudio/uni-app'
 import tmApp from '@/tmui/components/tm-app/tm-app.vue'
 import tmCarousel from '@/tmui/components/tm-carousel/tm-carousel.vue'
 import IndexBanner from './component/index-banner.vue'
@@ -86,8 +86,9 @@ const indexNavData = [
 
 const { statusBarHeight } = uni.$tm.u.getWindow()
 const isDark = ref(false)
+
 onPageScroll(({ scrollTop }) => {
-  if (scrollTop + statusBarHeight >= uni.$tm.u.topx(180)) {
+  if (scrollTop + statusBarHeight >= uni.$tm.u.topx(200)) {
     isDark.value = true
   } else {
     isDark.value = false
@@ -96,17 +97,9 @@ onPageScroll(({ scrollTop }) => {
 
 watch(isDark, (val) => {
   if (plus.os.name === 'iOS') {
-    if (val) {
-      plus.navigator.setStatusBarStyle('dark')
-    } else {
-      plus.navigator.setStatusBarStyle('light')
-    }
+    val ? plus.navigator.setStatusBarStyle('dark') : plus.navigator.setStatusBarStyle('light')
   } else if (plus.os.name === 'Android') {
-    if (val) {
-      plus.navigator.setStatusBarBackground('#fff')
-    } else {
-      plus.navigator.setStatusBarBackground('#000')
-    }
+    val ? plus.navigator.setStatusBarBackground('#fff') : plus.navigator.setStatusBarBackground('#000')
   }
 })
 </script>
