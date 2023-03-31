@@ -19,7 +19,7 @@ export default defineConfig({
     }),
     Components({
       extensions: ['vue'],
-      dirs: [],
+      dirs: ['src/tmui/components'],
       dts: 'typings/auto-components.d.ts',
     }),
   ],

@@ -1,6 +1,6 @@
 <template>
   <view
-    :style="{ backgroundColor: isDark ? '#fff' : 'transparent' }"
+    :class="{ 'is-dark': isDark }"
     class="header-container k-pt-safe k-h-200 k-w-full k-box-border k-ease-in k-duration-300 k-bg-transparent k-fixed k-z-999"
     k-p="x3">
     <!-- 头部搜索框 -->
@@ -33,23 +33,8 @@ defineProps<{
 </script>
 
 <style lang="scss" scoped>
-.index-header {
-  .header-bg-img {
-    filter: blur(0);
-
-    img {
-      filter: blur(30rpx);
-    }
-  }
-
-  .carousel {
-    ::v-deep .uni-swiper-slide-frame {
-      div {
-        width: 90%;
-        border-radius: 10rpx;
-        margin: 0 auto;
-      }
-    }
-  }
+.is-dark {
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 </style>

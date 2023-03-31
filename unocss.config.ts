@@ -14,6 +14,7 @@ export default defineConfig({
     {
       'k-border-base': 'k-border k-border-gray-500_10',
       'k-center': 'k-flex k-justify-center k-items-center',
+      'k-col-center': 'k-flex k-flex-col k-justify-center k-items-center',
       'k-bg-base': 'k-bg-#f6f7fb',
       'k-text-c1': 'k-color-#000/85',
       'k-text-c2': 'k-color-#000/65',

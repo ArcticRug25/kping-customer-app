@@ -1,10 +1,12 @@
 {
-  "pages": [
-    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-    {
-      "path": "pages/index/index",
-      "style": {
+	"pages": [
+		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
 				"navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
+        "navigationBarBackgroundColor": "#ffffff",
 				// #ifdef APP-PLUS
 				"enablePullDownRefresh": true,
 				// #endif
@@ -12,45 +14,46 @@
 					"scrollIndicator": "none" //禁用原生导航栏
 				}
 			}
-    },
-    {
-      "path": "pages/pinia/index",
-      "style": {
-        "navigationBarTitleText": "状态管理工具（pinia）"
-      }
-    },
-    {
-      "path": "pages/axios/index",
-      "style": {
-        "navigationBarTitleText": "Axios（网络请求示例）"
-      }
-    },
-    {
-      "path": "pages/uview/index",
-      "style": {
-        "navigationBarTitleText": "uView 示例组件"
-      }
-    },
-    {
-      "path": "pages/unocss/index",
-      "style": {
-        "navigationBarTitleText": "UnoCSS 示例"
-      }
-    }
-  ],
-  "globalStyle": {
-    "navigationBarTextStyle": "black",
+		},
+		{
+			"path": "pages/pinia/index",
+			"style": {
+				"navigationBarTitleText": "状态管理工具（pinia）"
+			}
+		},
+		{
+			"path": "pages/axios/index",
+			"style": {
+				"navigationBarTitleText": "Axios（网络请求示例）"
+			}
+		},
+		{
+			"path": "pages/uview/index",
+			"style": {
+				"navigationBarTitleText": "uView 示例组件"
+			}
+		},
+		{
+			"path": "pages/unocss/index",
+			"style": {
+				"navigationBarTitleText": "UnoCSS 示例"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "loading...",
 		"navigationBarBackgroundColor": "#fff",
 		"backgroundColor": "#F8F8F8",
 		"titleNView": true
-  },
-  "tabBar": {
+	},
+	"tabBar": {
 		"color": "#282828",
 		"selectedColor": "#E93323",
 		"borderStyle": "white",
 		"backgroundColor": "#ffffff",
-		"list": [{
+		"list": [
+			{
 				"pagePath": "pages/index/index",
 				"iconPath": "static/images/1-001.png",
 				"selectedIconPath": "static/images/1-002.png",
@@ -70,7 +73,53 @@
 			}
 		]
 	},
-	
-  "easycom": {
-  }
+	"easycom": {},
+	"subPackages": [
+    {
+			"root": "pages/street",
+			"name": "street",
+			"pages": [
+        {
+					"path": "charge/index",
+					"style": {
+						"navigationBarTitleText": "Charging",
+						"app-plus": {
+							// #ifdef APP-PLUS
+							"titleNView": {
+								"type": "default"
+							}
+							// #endif
+						}
+					}
+				},
+				{
+					"path": "street-view/index",
+					"style": {
+						"navigationBarTitleText": "Street View",
+						"app-plus": {
+							// #ifdef APP-PLUS
+							"titleNView": {
+								"type": "default"
+							}
+							// #endif
+						}
+					}
+				}
+				// {
+				// 	"path": "view_street/index",
+				// 	"style": {
+				// 		"navigationBarTitleText": "View Street",
+						
+				// 		"app-plus": {
+				// 			// #ifdef APP-PLUS
+				// 			"titleNView": {
+				// 				"type": "default"
+				// 			}
+				// 			// #endif
+				// 		}
+				// 	}
+				// }
+			]
+		}
+	]
 }

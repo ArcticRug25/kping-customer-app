@@ -28,11 +28,15 @@
     </view>
     <!-- 导航栏 -->
     <view class="k-center k-bg-white k-h-180">
-      <view v-for="(item, index) in indexNavData" :key="index" class="k-center k-flex-col k-flex-1">
+      <view
+        v-for="(item, index) in indexNavData"
+        :key="index"
+        class="k-center k-flex-col k-flex-1"
+        @tap="navigateToOtherPage(item.path)">
         <view class="k-center k-rounded-50 k-w-90 k-h-90 k-shadow-lg" :style="{ background: item.color }">
           <view :class="item.icon" class="k-text-white k-text-xl"></view>
         </view>
-        <text class="k-text-c2 k-text-xs k-mt-2">{{ item.name }}</text>
+        <tmText :fontSize="24" color="#333333" class="k-mt-2">{{ item.name }}</tmText>
       </view>
     </view>
     <!-- 广告图 -->
@@ -43,9 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { onLoad, onPageScroll } from '@dcloudio/uni-app'
-import tmApp from '@/tmui/components/tm-app/tm-app.vue'
-import tmCarousel from '@/tmui/components/tm-carousel/tm-carousel.vue'
+import { onPageScroll } from '@dcloudio/uni-app'
 import IndexBanner from './component/index-banner.vue'
 import IndexHeader from './component/index-header.vue'
 import IndexMerchant from './component/index-merchant.vue'
@@ -61,13 +63,13 @@ const indexNavData = [
   {
     name: 'Charging',
     icon: 'i-bi-lightning-charge-fill',
-    path: '',
+    path: '/pages/street/charge/index',
     color: 'linear-gradient(180deg, #f3afad 0%, #ee7571 100%)',
   },
   {
     name: 'Street View',
     icon: 'i-bi-camera-fill',
-    path: '',
+    path: '/pages/street/street-view/index',
     color: 'linear-gradient(180deg, #F6C89B 0%, #F19A56 100%)',
   },
   {
@@ -86,6 +88,12 @@ const indexNavData = [
 
 const { statusBarHeight } = uni.$tm.u.getWindow()
 const isDark = ref(false)
+
+const navigateToOtherPage = (path: string) => {
+  uni.navigateTo({
+    url: path,
+  })
+}
 
 onPageScroll(({ scrollTop }) => {
   if (scrollTop + statusBarHeight >= uni.$tm.u.topx(200)) {
