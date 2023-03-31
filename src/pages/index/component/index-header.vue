@@ -1,10 +1,9 @@
 <template>
   <view
     :class="{ 'is-dark': isDark }"
-    class="header-container k-pt-safe k-h-200 k-w-full k-box-border k-ease-in k-duration-300 k-bg-transparent k-fixed k-z-999"
-    k-p="x3">
+    class="header-container k-pt-safe k-h-90 k-w-full k-ease-in k-duration-300 k-bg-transparent k-fixed k-z-999">
     <!-- 头部搜索框 -->
-    <view class="header-middle k-mt-2 k-flex k-items-center">
+    <view class="header-middle k-flex k-items-center">
       <view class="kping-logo k-pt-1">
         <image class="k-w-144rpx k-h-60rpx" src="/static/images/kping-logo.png"></image>
       </view>
@@ -16,7 +15,7 @@
         <view class="i-bi-search k-text-c3 k-text-xs"></view>
       </view>
       <view
-        class="i-bi-qr-code-scan k-w-30px k-ml-2 k-ease-in k-duration-300"
+        class="i-bi-qr-code-scan k-w-70 k-mx2 k-ease-in k-duration-300"
         :style="{ color: isDark ? '#000' : '#fff' }" />
     </view>
   </view>

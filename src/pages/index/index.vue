@@ -72,12 +72,12 @@ const indexNavData = [
     path: '/pages/street/street-view/index',
     color: 'linear-gradient(180deg, #F6C89B 0%, #F19A56 100%)',
   },
-  {
-    name: 'Vouchers',
-    icon: 'i-bi-ticket-detailed-fill',
-    path: '',
-    color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
-  },
+  // {
+  //   name: 'Vouchers',
+  //   icon: 'i-bi-ticket-detailed-fill',
+  //   path: '',
+  //   color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
+  // },
   {
     name: 'F&B',
     icon: 'i-bi-handbag-fill',
@@ -96,13 +96,14 @@ const navigateToOtherPage = (path: string) => {
 }
 
 onPageScroll(({ scrollTop }) => {
-  if (scrollTop + statusBarHeight >= uni.$tm.u.topx(200)) {
+  if (scrollTop >= uni.$tm.u.topx(90) + statusBarHeight) {
     isDark.value = true
   } else {
     isDark.value = false
   }
 })
 
+// #ifdef APP-PLUS
 watch(isDark, (val) => {
   if (plus.os.name === 'iOS') {
     val ? plus.navigator.setStatusBarStyle('dark') : plus.navigator.setStatusBarStyle('light')
@@ -110,6 +111,7 @@ watch(isDark, (val) => {
     val ? plus.navigator.setStatusBarBackground('#fff') : plus.navigator.setStatusBarBackground('#000')
   }
 })
+// #endif
 </script>
 
 <style lang="scss" scoped>
