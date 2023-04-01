@@ -5,8 +5,22 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationStyle": "custom",
-        "navigationBarTextStyle": "white",
-        "navigationBarBackgroundColor": "#ffffff",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#ffffff",
+				// #ifdef APP-PLUS
+				"enablePullDownRefresh": true,
+				// #endif
+				"app-plus": {
+					"scrollIndicator": "none" //禁用原生导航栏
+				}
+			}
+		},
+		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#ffffff",
 				// #ifdef APP-PLUS
 				"enablePullDownRefresh": true,
 				// #endif
@@ -75,11 +89,11 @@
 	},
 	"easycom": {},
 	"subPackages": [
-    {
+		{
 			"root": "pages/street",
 			"name": "street",
 			"pages": [
-        {
+				{
 					"path": "charge/index",
 					"style": {
 						"navigationBarTitleText": "Charging",
@@ -109,7 +123,6 @@
 				// 	"path": "view_street/index",
 				// 	"style": {
 				// 		"navigationBarTitleText": "View Street",
-						
 				// 		"app-plus": {
 				// 			// #ifdef APP-PLUS
 				// 			"titleNView": {

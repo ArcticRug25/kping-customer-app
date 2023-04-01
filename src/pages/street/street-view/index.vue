@@ -26,7 +26,7 @@
     </tm-sheet>
     <tm-sheet _class="k-center k-w-full" :margin="[10]">
       <view class="k-w-128 k-h-128">
-        <tm-image :width="128" :height="128" :round="25" src="/static/images/f.png"></tm-image>
+        <tm-image class="avatar-img" :width="128" :height="128" :round="25" src="/static/images/f.png"></tm-image>
       </view>
       <view class="k-w-full k-flex k-justify-evenly k-mt-4">
         <tm-text color="#666">K.Point: 0</tm-text>
@@ -49,4 +49,8 @@ defineOptions({
 const isViewing = ref(false)
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.avatar-img {
+  filter: drop-shadow(0 4rpx 10rpx rgba(0, 0, 0, 0.2));
+}
+</style>

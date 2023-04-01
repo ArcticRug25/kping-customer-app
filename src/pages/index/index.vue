@@ -72,12 +72,12 @@ const indexNavData = [
     path: '/pages/street/street-view/index',
     color: 'linear-gradient(180deg, #F6C89B 0%, #F19A56 100%)',
   },
-  // {
-  //   name: 'Vouchers',
-  //   icon: 'i-bi-ticket-detailed-fill',
-  //   path: '',
-  //   color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
-  // },
+  {
+    name: 'Vouchers',
+    icon: 'i-bi-ticket-detailed-fill',
+    path: '',
+    color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
+  },
   {
     name: 'F&B',
     icon: 'i-bi-handbag-fill',
