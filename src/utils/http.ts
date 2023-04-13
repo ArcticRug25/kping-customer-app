@@ -8,7 +8,7 @@ export function getFullURL(
   baseURL: string,
   url: string,
   params: Record<string, any>,
-  paramsSerializer?: ParamsSerializer
+  paramsSerializer?: ParamsSerializer,
 ) {
   if (url.startsWith('http')) {
     return buildURL(url, params, paramsSerializer)

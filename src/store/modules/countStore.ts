@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-const useStore = defineStore('storeId', {
+export default defineStore('count', {
   // arrow function recommended for full type inference
   state: () => ({
     // all these properties will have their type inferred automatically
@@ -18,6 +18,7 @@ const useStore = defineStore('storeId', {
       this.count += 1
     },
   },
+  persist: {
+    enabled: true,
+  },
 })
-
-export default useStore

@@ -52,6 +52,30 @@
 			"style": {
 				"navigationBarTitleText": "UnoCSS 示例"
 			}
+		},
+		{
+			"path": "pages/mask/index",
+			"style": {
+				"navigationStyle": "custom", // 取消本页面的导航栏
+				"disableScroll": true,
+				"app-plus": {
+					"bounce": "none",
+					"animationType": "none", // 设置fade-in淡入动画，为最合理的动画类型
+					"backgroundColor": "transparent",
+					"popGesture": "none", // 关闭IOS屏幕左边滑动关闭当前页面的功能
+					"backgroundColorBottom": "transparent"
+				}
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "slide-in-bottom",
+					"popGesture": "none"
+				}
+			}
 		}
 	],
 	"globalStyle": {

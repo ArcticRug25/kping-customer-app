@@ -14,7 +14,8 @@ export default defineConfig({
     process.env.UNI_COMPILER !== 'nvue' ? Unocss() : undefined,
     DefineOptions(),
     AutoImport({
-      imports: ['vue', '@vueuse/core'],
+      imports: ['vue', '@vueuse/core', 'pinia'],
+      dirs: ['./src/store', './src/utils', './src/composables'],
       dts: 'typings/auto-imports.d.ts',
     }),
     Components({

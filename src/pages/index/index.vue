@@ -96,7 +96,7 @@ const navigateToOtherPage = (path: string) => {
 }
 
 onPageScroll(({ scrollTop }) => {
-  if (scrollTop >= uni.$tm.u.topx(90) + statusBarHeight) {
+  if (scrollTop >= uni.$tm.u.topx(100) + statusBarHeight) {
     isDark.value = true
   } else {
     isDark.value = false

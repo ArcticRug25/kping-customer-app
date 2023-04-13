@@ -11,11 +11,12 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": [
+      "unplugin-vue-define-options/macros-global",
       "@dcloudio/types",
       "vite/client",
+      "pinia-plugin-persist-uni",
       "@types/node",
       "vitest/globals",
-      "unplugin-vue-define-options/macros-global",
     ],
     "baseUrl": "./",
     "paths": {
@@ -23,5 +24,12 @@
       "@components/*": ["src/components/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "typings/*.d.ts", "typings/**/*.d.ts"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "typings/*.d.ts", "typings/**/*.d.ts"],
+  "vueCompilerOptions": {
+    "target": 3, // or 2.7 for Vue 2
+    "plugins": [
+      "@vue-macros/volar/define-options"
+      // ...more feature
+    ]
+  }
 }

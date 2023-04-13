@@ -1,9 +1,9 @@
 <template>
   <view
     :class="{ 'is-dark': isDark }"
-    class="header-container k-pt-safe k-h-90 k-w-full k-ease-in k-duration-300 k-bg-transparent k-fixed k-z-999">
+    class="k-flex k-items-center k-pt-safe k-h-100 k-w-full k-ease-in k-duration-300 k-bg-transparent k-fixed k-z-999">
     <!-- 头部搜索框 -->
-    <view class="header-middle k-flex k-items-center">
+    <view class="header-middle k-w-full k-flex k-items-center">
       <view class="kping-logo k-pt-1">
         <image class="k-w-144rpx k-h-60rpx" src="/static/images/kping-logo.png"></image>
       </view>

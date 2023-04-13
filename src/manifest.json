@@ -16,7 +16,12 @@
             "delay" : 0
         },
         "modules" : {
-            "Canvas" : "nvue-canvas"
+            "Canvas" : "nvue canvas"
+        },
+        "safearea": {
+            "bottom": {  
+                  "offset": "none" 
+              }   
         },
         "distribute" : {
             "android" : {

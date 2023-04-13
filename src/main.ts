@@ -5,10 +5,11 @@ import App from './App.vue'
 
 // unocss
 import 'uno.css'
+import { setupPinia } from './store'
 
 export function createApp() {
   const app = createSSRApp(App)
-  app.use(Pinia.createPinia())
+  setupPinia(app)
   app.use(tmui)
   return {
     app,
