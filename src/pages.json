@@ -76,6 +76,16 @@
 					"popGesture": "none"
 				}
 			}
+		},
+		{
+			"path": "pages/login/areaCode",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"animationType": "slide-in-bottom",
+					"popGesture": "none"
+				}
+			}
 		}
 	],
 	"globalStyle": {

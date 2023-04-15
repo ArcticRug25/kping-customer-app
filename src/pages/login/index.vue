@@ -22,12 +22,23 @@
         :round="25"
         v-model="phone"
         :shadow="2"
-        class="login-input k-w-600rpx"
+        class="login-input phone-input k-w-600rpx"
         placeholder="Please enter your phone number"
         prefix="tmicon-mobile-alt"
         prefix-color="#FEA600"
         focusColor="white"
-        showClear></tm-input>
+        showClear>
+        <template #left>
+          <view class="k-absolute k-flex k-items-center k-left-45rpx k-z6" @tap="handleChooseAreaCode">
+            <view
+              class="k-align-middle k-mr-8rpx k-w-90rpx k-text-30rpx k-text-center"
+              :style="{ color: areaCode ? '' : '#ccc' }">
+              {{ areaCode ? '+' + areaCode : 'Area' }}
+            </view>
+            <view class="k-h-40rpx k-w-1px k-border-l k-border-#ccc"></view>
+          </view>
+        </template>
+      </tm-input>
       <view class="k-py-10rpx"></view>
       <tm-input
         v-if="isPassword"
@@ -76,7 +87,7 @@
         :width="600"
         :height="100"
         color="#F3AA3C"
-        @tap="sendCode"
+        @tap="handleLogin"
         label="Login"></tm-button>
       <view class="k-flex k-w-600 k-items-center k-py20rpx">
         <tm-checkbox :size="30" :round="10" color="orange" value="banner" label="I have read and agreed"></tm-checkbox>
@@ -91,10 +102,14 @@ defineOptions({
   name: 'LoginPage',
 })
 
-const phone = ref('aaaaaaaaaaa')
+const phone = ref('189')
 // 密码登录还是验证码登录
 const isPassword = ref(false)
 
+// 手机区域码
+const areaCode = ref('')
+
+// 验证码倒计时功能
 const { code, codeStatus, countDown } = useCode()
 
 // 关闭登录页面
@@ -102,8 +117,31 @@ const closeLoginPage = () => {
   uni.navigateBack()
 }
 
+// 发送验证码
 const sendCode = () => {
   countDown()
+}
+
+// 验证
+const validateForm = () => {
+  uni.$tm.u.callPhone(phone.value)
+}
+
+// 选择区域码
+const handleChooseAreaCode = () => {
+  console.log(' ', 1)
+  uni.navigateTo({
+    url: '/pages/login/areaCode',
+  })
+}
+
+// 登录
+const handleLogin = () => {
+  if (isPassword.value) {
+    // 密码登录
+  } else {
+    // 验证码登录
+  }
 }
 </script>
 
@@ -111,6 +149,13 @@ const sendCode = () => {
 .login-input {
   ::v-deep & > view > view {
     background-color: white !important;
+  }
+
+  &.phone-input {
+    ::v-deep input {
+      position: relative;
+      margin-left: 110rpx;
+    }
   }
 }
 
