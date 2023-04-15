@@ -31,7 +31,7 @@
         <template #left>
           <view class="k-absolute k-flex k-items-center k-left-45rpx k-z6" @tap="handleChooseAreaCode">
             <view
-              class="k-align-middle k-mr-8rpx k-w-90rpx k-text-30rpx k-text-center"
+              class="k-align-middle k-mr-8rpx k-w-90rpx k-text-28rpx k-text-center"
               :style="{ color: areaCode ? '' : '#ccc' }">
               {{ areaCode ? '+' + areaCode : 'Area' }}
             </view>
@@ -59,6 +59,7 @@
           :height="100"
           :round="25"
           :shadow="2"
+          v-model="authCode"
           class="login-input k-w-360rpx"
           prefix-color="#FEA600"
           placeholder="Authentication code"
@@ -94,20 +95,26 @@
         <tm-text class="k-ml-2" color="#FEA600">Privacy Policy</tm-text>
       </view>
     </view>
+    <!-- 错误提示 -->
+    <tm-notification color="#E04835" class="error-tip" placement="top" ref="msg" :duration="2000"></tm-notification>
   </tm-app>
 </template>
 
 <script setup lang="ts">
+import tmNotification from '@/tmui/components/tm-notification/tm-notification.vue'
+
 defineOptions({
   name: 'LoginPage',
 })
 
 const phone = ref('189')
+// 验证码
+const authCode = ref('')
 // 密码登录还是验证码登录
 const isPassword = ref(false)
 
 // 手机区域码
-const areaCode = ref('')
+const { areaCode } = toRefs(useUserStore())
 
 // 验证码倒计时功能
 const { code, codeStatus, countDown } = useCode()
@@ -117,19 +124,44 @@ const closeLoginPage = () => {
   uni.navigateBack()
 }
 
-// 发送验证码
-const sendCode = () => {
-  countDown()
+const msg = ref<InstanceType<typeof tmNotification> | null>(null)
+
+// 输入错误提示
+function errorTip(error: string) {
+  nextTick(() => {
+    msg.value?.show({ label: error })
+  })
 }
 
-// 验证
-const validateForm = () => {
-  uni.$tm.u.callPhone(phone.value)
+// 验证表单
+const validateForm = (): boolean => {
+  if (!areaCode) {
+    errorTip('Please select the area code')
+    return false
+  }
+
+  if (!uni.$tm.u.isPhone(phone.value)) {
+    errorTip('Please enter the correct phone number.')
+    return false
+  }
+
+  if (authCode.value.length < 6) {
+    errorTip('Please enter the correct verification code.')
+    return false
+  }
+  return true
+}
+
+// 发送验证码
+const sendCode = () => {
+  const isRight = validateForm()
+  if (isRight) {
+    countDown()
+  }
 }
 
 // 选择区域码
 const handleChooseAreaCode = () => {
-  console.log(' ', 1)
   uni.navigateTo({
     url: '/pages/login/areaCode',
   })
@@ -137,6 +169,8 @@ const handleChooseAreaCode = () => {
 
 // 登录
 const handleLogin = () => {
+  const isRight = validateForm()
+  if (!isRight) return
   if (isPassword.value) {
     // 密码登录
   } else {
@@ -165,5 +199,9 @@ const handleLogin = () => {
 
 .send-btn {
   box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.2) !important;
+}
+
+.error-tip {
+  top: calc(env(safe-area-inset-top) + 24rpx) !important;
 }
 </style>

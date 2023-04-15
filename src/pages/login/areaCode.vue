@@ -1,19 +1,25 @@
 <template>
   <tm-app class="k-h-full k-pt-safe">
-    <tm-indexes class="area-code-list" :height="800">
-      <tm-indexes-item v-for="(item, index) in hot" :title="index ? '' : '#'" :navTitle="index ? '' : '#'" :key="index">
+    <tm-indexes class="area-code-list">
+      <tm-indexes-item
+        v-for="(item, index) in hot"
+        :title="index ? '' : '#'"
+        :navTitle="index ? '' : '#'"
+        :key="index"
+        @tap="() => handleSelectAreacode(item.tel)">
         <view class="k-h-88rpx k-flex k-items-center">
-          <tm-image preview :height="30" :width="50" :src="item.flag" errorLabel="" errorIcon="null"></tm-image>
+          <image class="k-h-30rpx k-w-50rpx" :src="item.flag"></image>
           <tm-text class="k-ml-3" :fontSize="30" color="#46595F">{{ item.name + ' ' + item.en }}</tm-text>
         </view>
       </tm-indexes-item>
       <tm-indexes-item
         v-for="(item, index) in list"
+        @tap="() => handleSelectAreacode(item.tel)"
         :title="item.isFirst ? item.en.charAt(0) : ''"
         :navTitle="item.en.charAt(0)"
         :key="index">
         <view class="k-h-88rpx k-flex k-items-center">
-          <tm-image preview :height="30" :width="50" :src="item.flag" errorLabel="" errorIcon="null"></tm-image>
+          <image class="k-h-30rpx k-w-50rpx" :src="item.flag"></image>
           <tm-text class="k-ml-3" :fontSize="30" color="#46595F">{{ item.name + ' ' + item.en }}</tm-text>
         </view>
       </tm-indexes-item>
@@ -25,6 +31,13 @@
 import areaList from '@/static/data/list.json'
 
 const { list, hot } = areaList
+
+// 选择手机区号
+const handleSelectAreacode = (item: string) => {
+  const userStore = useUserStore()
+  userStore.areaCode = item
+  uni.navigateBack()
+}
 </script>
 
 <style lang="scss" scoped>
