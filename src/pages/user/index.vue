@@ -21,7 +21,7 @@ const isLogin = ref(false)
 
 const authTo = (url: string) => {
   uni.navigateTo({
-    url: '/pages/mask/index',
+    url: '/pages/mask/authModal',
   })
 }
 </script>

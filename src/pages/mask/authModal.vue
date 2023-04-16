@@ -5,6 +5,10 @@
 import { onShow } from '@dcloudio/uni-app'
 import Auth from '@/components/auth/index.vue'
 
+defineOptions({
+  name: 'AuthModal',
+})
+
 const show = ref(true)
 
 onShow(() => {

@@ -95,6 +95,10 @@ const navigateToOtherPage = (path: string) => {
   })
 }
 
+uni.navigateTo({
+  url: '/pages/mask/voucherModal',
+})
+
 onPageScroll(({ scrollTop }) => {
   if (scrollTop >= uni.$tm.u.topx(100) + statusBarHeight) {
     isDark.value = true
