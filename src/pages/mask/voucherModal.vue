@@ -1,10 +1,20 @@
 <template>
   <view>
-    <tm-overlay class="voucher-modal" v-model:show="showWin" contentAnimation>
+    <tm-overlay
+      class="voucher-modal"
+      @close="handleClose"
+      :overlay-click="false"
+      v-model:show="showWin"
+      contentAnimation>
       <!-- 背景图 -->
-      <image class="k-w-800rpx k-h-1422rpx k-absolute" src="@/static/images/voucher-bg2.png" />
+      <image
+        class="voucher-bg k-w-800rpx k-h-1422rpx k-absolute"
+        :style="{ transform: scaleAnimate ? 'scale(1)' : 'scale(0)' }"
+        src="@/static/images/voucher-bg2.png" />
       <!-- 内容 -->
-      <view class="k-relative k-w-660rpx k-h-680rpx k-pt-30rpx">
+      <view
+        class="voucher-content k-relative k-w-660rpx k-h-680rpx k-pt-30rpx"
+        :style="{ transform: scaleAnimate ? 'scale(1)' : 'scale(0)' }">
         <image class="kping-logo k-absolute k-z2 k-w-162rpx k-h-74rpx" src="@/static/images/kping-logo.png" />
         <view class="k-w-full k-center k-mt-3 k-mb-1">
           <tm-text class="k-text-shadow-lg" :font-size="32" color="#ffffff"
@@ -13,153 +23,43 @@
         </view>
         <!-- 票券列表 -->
         <scroll-view scroll-y="true" class="k-w-full k-h-640rpx k-box-border">
-          <view
-            class="scroll-view-item k-w-94% k-mx-auto k-box-border k-py-16rpx k-mt-2 k-bg-white k-rounded-2 k-h-160rpx k-flex">
-            <view class="voucher-left k-basis-68% k-box-border k-flex k-px-14rpx">
-              <view class="k-h-128rpx k-w-128rpx k-rounded-1 k-overflow-hidden k-shadow-md">
-                <image
-                  class="k-full"
-                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-              </view>
-              <view class="k-ml-14rpx k-h-128rpx k-flex k-flex-col k-justify-evenly">
-                <tm-text :fontSize="32">ManDangDang</tm-text>
-                <view class="k-flex k-items-center">
-                  <tm-text class="k-mr-1" color="#aaa" :fontSize="24">Get</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="36">60</tm-text>
-                  <tm-text class="k-mr-10rpx" color="#aaa" :fontSize="24">off</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="34">100</tm-text>
-                </view>
-              </view>
-            </view>
-            <view class="voucher-right k-basis-32% k-box-border k-flex k-flex-col k-items-center k-justify-center">
-              <tm-text color="#aaa" :fontSize="24">Expires in 12h</tm-text>
-              <tm-button
-                :width="160"
-                size="mini"
-                :margin="[0, 16, 0, 0]"
-                :height="50"
-                linear="right"
-                :round="25"
-                color="red"
-                >To Use</tm-button
-              >
-            </view>
-          </view>
-          <view
-            class="scroll-view-item k-w-94% k-mx-auto k-box-border k-py-16rpx k-mt-2 k-bg-white k-rounded-2 k-h-160rpx k-flex">
-            <view class="voucher-left k-basis-68% k-box-border k-flex k-px-14rpx">
-              <view class="k-h-128rpx k-w-128rpx k-rounded-1 k-overflow-hidden k-shadow-md">
-                <image
-                  class="k-full"
-                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-              </view>
-              <view class="k-ml-14rpx k-h-128rpx k-flex k-flex-col k-justify-evenly">
-                <tm-text :fontSize="32">ManDangDang</tm-text>
-                <view class="k-flex k-items-center">
-                  <tm-text class="k-mr-1" color="#aaa" :fontSize="24">Get</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="36">60</tm-text>
-                  <tm-text class="k-mr-10rpx" color="#aaa" :fontSize="24">off</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="34">100</tm-text>
-                </view>
-              </view>
-            </view>
-            <view class="voucher-right k-basis-32% k-box-border k-flex k-flex-col k-items-center k-justify-center">
-              <tm-text color="#aaa" :fontSize="24">Expires in 12h</tm-text>
-              <tm-button
-                :width="160"
-                size="mini"
-                :margin="[0, 16, 0, 0]"
-                :height="50"
-                linear="right"
-                :round="25"
-                color="red"
-                >To Use</tm-button
-              >
-            </view>
-          </view>
-          <view
-            class="scroll-view-item k-w-94% k-mx-auto k-box-border k-py-16rpx k-mt-2 k-bg-white k-rounded-2 k-h-160rpx k-flex">
-            <view class="voucher-left k-basis-68% k-box-border k-flex k-px-14rpx">
-              <view class="k-h-128rpx k-w-128rpx k-rounded-1 k-overflow-hidden k-shadow-md">
-                <image
-                  class="k-full"
-                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-              </view>
-              <view class="k-ml-14rpx k-h-128rpx k-flex k-flex-col k-justify-evenly">
-                <tm-text :fontSize="32">ManDangDang</tm-text>
-                <view class="k-flex k-items-center">
-                  <tm-text class="k-mr-1" color="#aaa" :fontSize="24">Get</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="36">60</tm-text>
-                  <tm-text class="k-mr-10rpx" color="#aaa" :fontSize="24">off</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="34">100</tm-text>
-                </view>
-              </view>
-            </view>
-            <view class="voucher-right k-basis-32% k-box-border k-flex k-flex-col k-items-center k-justify-center">
-              <tm-text color="#aaa" :fontSize="24">Expires in 12h</tm-text>
-              <tm-button
-                :width="160"
-                size="mini"
-                :margin="[0, 16, 0, 0]"
-                :height="50"
-                linear="right"
-                :round="25"
-                color="red"
-                >To Use</tm-button
-              >
-            </view>
-          </view>
-          <view
-            class="scroll-view-item k-w-94% k-mx-auto k-box-border k-py-16rpx k-mt-2 k-bg-white k-rounded-2 k-h-160rpx k-flex">
-            <view class="voucher-left k-basis-68% k-box-border k-flex k-px-14rpx">
-              <view class="k-h-128rpx k-w-128rpx k-rounded-1 k-overflow-hidden k-shadow-md">
-                <image
-                  class="k-full"
-                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-              </view>
-              <view class="k-ml-14rpx k-h-128rpx k-flex k-flex-col k-justify-evenly">
-                <tm-text :fontSize="32">ManDangDang</tm-text>
-                <view class="k-flex k-items-center">
-                  <tm-text class="k-mr-1" color="#aaa" :fontSize="24">Get</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="36">60</tm-text>
-                  <tm-text class="k-mr-10rpx" color="#aaa" :fontSize="24">off</tm-text>
-                  <tm-text class="k-mr-2rpx" color="red" :fontSize="24">$</tm-text>
-                  <tm-text class="k-mr-1" color="red" :fontSize="34">100</tm-text>
-                </view>
-              </view>
-            </view>
-            <view class="voucher-right k-basis-32% k-box-border k-flex k-flex-col k-items-center k-justify-center">
-              <tm-text color="#aaa" :fontSize="24">Expires in 12h</tm-text>
-              <tm-button
-                :width="160"
-                size="mini"
-                :margin="[0, 16, 0, 0]"
-                :height="50"
-                linear="right"
-                :round="25"
-                color="red"
-                >To Use</tm-button
-              >
-            </view>
-          </view>
+          <voucherItem />
+          <voucherItem />
+          <voucherItem />
+          <voucherItem />
         </scroll-view>
+
+        <view
+          class="i-bi-x-circle k-absolute k-color-#f0f0f0 k-text-2xl k-left-50% -k-bottom-130rpx -k-translate-x-50% k-z4"
+          @tap="handleClose"></view>
       </view>
     </tm-overlay>
   </view>
 </template>
 <script lang="ts" setup>
+import voucherItem from '@/components/voucher/voucherItem.vue'
+
 defineOptions({
   name: 'VoucherModal',
 })
 const showWin = ref(true)
 const pos = ref(false)
+
+const scaleAnimate = ref(false)
+
+onMounted(() => {
+  nextTick(() => {
+    scaleAnimate.value = true
+  })
+})
+
+// 关闭弹窗
+const handleClose = () => {
+  scaleAnimate.value = false
+  setTimeout(() => {
+    uni.navigateBack()
+  }, 300)
+}
 </script>
 
 <style lang="scss">
@@ -178,30 +78,39 @@ page {
     transform: translate(-50%, -110%);
   }
 
-  .scroll-view-item {
-    .voucher-right {
-      border-left: 1px dashed #ccc;
-      position: relative;
+  .voucher-bg {
+    transition: all 0.3s ease-in-out;
+    transform: scale(0);
+  }
 
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        display: inline-block;
-        width: 24rpx;
-        height: 24rpx;
-        background: #eb4953;
-        border-radius: 45%;
-        left: -12rpx;
-        z-index: 1;
-      }
+  .voucher-content {
+    transition: all 0.3s ease-in-out;
+    transform: scale(0);
+    .scroll-view-item {
+      .voucher-right {
+        border-left: 1px dashed #ccc;
+        position: relative;
 
-      &::before {
-        top: -32rpx;
-      }
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          display: inline-block;
+          width: 24rpx;
+          height: 24rpx;
+          background: #eb4953;
+          border-radius: 45%;
+          left: -12rpx;
+          z-index: 1;
+        }
 
-      &::after {
-        bottom: -32rpx;
+        &::before {
+          top: -32rpx;
+        }
+
+        &::after {
+          bottom: -32rpx;
+        }
       }
     }
   }

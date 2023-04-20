@@ -75,7 +75,7 @@ const indexNavData = [
   {
     name: 'Vouchers',
     icon: 'i-bi-ticket-detailed-fill',
-    path: '',
+    path: '/pages/mask/voucherModal',
     color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
   },
   {
