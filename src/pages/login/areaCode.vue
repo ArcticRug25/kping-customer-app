@@ -6,7 +6,7 @@
         :title="index ? '' : '#'"
         :navTitle="index ? '' : '#'"
         :key="index"
-        @tap="() => handleSelectAreacode(item.tel)">
+        @click="() => handleSelectAreacode(item.tel)">
         <view class="k-h-88rpx k-flex k-items-center">
           <image class="k-h-30rpx k-w-50rpx" :src="item.flag"></image>
           <tm-text class="k-ml-3" :fontSize="30" color="#46595F">{{ item.name + ' ' + item.en }}</tm-text>
@@ -14,7 +14,7 @@
       </tm-indexes-item>
       <tm-indexes-item
         v-for="(item, index) in list"
-        @tap="() => handleSelectAreacode(item.tel)"
+        @click="() => handleSelectAreacode(item.tel)"
         :title="item.isFirst ? item.en.charAt(0) : ''"
         :navTitle="item.en.charAt(0)"
         :key="index">

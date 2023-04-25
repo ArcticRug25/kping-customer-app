@@ -32,7 +32,7 @@
         v-for="(item, index) in indexNavData"
         :key="index"
         class="k-center k-flex-col k-flex-1"
-        @tap="navigateToOtherPage(item.path)">
+        @click="navigateToOtherPage(item.path)">
         <view class="k-center k-rounded-50 k-w-90 k-h-90 k-shadow-lg" :style="{ background: item.color }">
           <view :class="item.icon" class="k-text-white k-text-xl"></view>
         </view>
@@ -95,9 +95,9 @@ const navigateToOtherPage = (path: string) => {
   })
 }
 
-uni.navigateTo({
-  url: '/pages/mask/voucherModal',
-})
+// uni.navigateTo({
+//   url: '/pages/mask/voucherModal',
+// })
 
 onPageScroll(({ scrollTop }) => {
   if (scrollTop >= uni.$tm.u.topx(100) + statusBarHeight) {

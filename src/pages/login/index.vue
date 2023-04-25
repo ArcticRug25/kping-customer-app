@@ -5,7 +5,7 @@
       src="https://cdn.tmui.design/tmui3/loginbase/assets/loginbg-white.9e842cd7.jpg" />
     <view class="k-full k-z2 k-flex k-flex-col k-items-center">
       <tm-icon
-        @tap="closeLoginPage"
+        @click="closeLoginPage"
         color="#9e9e9e"
         class="k-absolute k-left-40 k-pt-safe k-top-20 k-z3"
         name="tmicon-times"></tm-icon>
@@ -29,7 +29,7 @@
         focusColor="white"
         showClear>
         <template #left>
-          <view class="k-absolute k-flex k-items-center k-left-45rpx k-z6" @tap="handleChooseAreaCode">
+          <view class="k-absolute k-flex k-items-center k-left-45rpx k-z6" @click="handleChooseAreaCode">
             <view
               class="k-align-middle k-mr-8rpx k-w-90rpx k-text-28rpx k-text-center"
               :style="{ color: areaCode ? '' : '#ccc' }">
@@ -72,13 +72,13 @@
           :width="200"
           :height="75"
           color="#F3AA3C"
-          @tap="sendCode"
+          @click="sendCode"
           :disabled="codeStatus"
           :style="{ opacity: codeStatus ? 0.5 : 1 }"
           :label="codeStatus ? code + 's' : 'Send'"></tm-button>
       </view>
       <view class="k-flex k-w-580rpx k-justify-end k-mb-2">
-        <tm-text color="#9E9E9E" :font-size="24" @tap="isPassword = !isPassword">{{
+        <tm-text color="#9E9E9E" :font-size="24" @click="isPassword = !isPassword">{{
           isPassword ? 'Authentication Code' : 'Password'
         }}</tm-text>
       </view>
@@ -88,7 +88,7 @@
         :width="600"
         :height="100"
         color="#F3AA3C"
-        @tap="handleLogin"
+        @click="handleLogin"
         label="Login"></tm-button>
       <view class="k-flex k-w-600 k-items-center k-py20rpx">
         <tm-checkbox :size="30" :round="10" color="orange" value="banner" label="I have read and agreed"></tm-checkbox>

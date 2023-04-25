@@ -28,10 +28,9 @@
           <voucherItem />
           <voucherItem />
         </scroll-view>
-
         <view
           class="i-bi-x-circle k-absolute k-color-#f0f0f0 k-text-2xl k-left-50% -k-bottom-130rpx -k-translate-x-50% k-z4"
-          @tap="handleClose"></view>
+          @click="handleClose"></view>
       </view>
     </tm-overlay>
   </view>
