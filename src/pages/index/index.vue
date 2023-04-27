@@ -3,7 +3,7 @@
     <IndexHeader :isDark="isDark" />
     <view
       class="index-header k-pt-safe k-relative k-overflow-hidden k-w-100vw k-h-180"
-      :style="{ height: listimg.length ? '560rpx' : '180rpx' }">
+      :style="{ height: listimg.length ? '630rpx' : '180rpx' }">
       <!-- 背景图 -->
       <view class="header-bg-img k-absolute k-w-full k-h-full k-top-0 k-overflow-hidden">
         <!-- #ifdef APP-PLUS  -->
@@ -16,7 +16,7 @@
         <!-- #endif -->
       </view>
       <!-- 轮播图 -->
-      <view v-if="listimg.length" class="header-carousel k-box-border k-mt-[130rpx]">
+      <view v-if="listimg.length" class="header-carousel k-box-border k-mt-[200rpx]">
         <tm-carousel
           :height="400"
           :duration="1200"

@@ -181,6 +181,29 @@
 				// 	}
 				// }
 			]
+		},
+		{
+			"root": "pages",
+			"pages": [
+				{
+					"path": "merchant/detail/index",
+					"style":{
+						"navigationStyle": "custom",
+						"app-plus":{
+							"bounce": "none"
+							// "titleNView":{
+							// 	"type":"transparent",
+							// 	"backgroundColor": "#ffffff",
+							// 	"buttons":[
+							// 		{
+							// 			"type":"share"
+							// 		}
+							// 	]
+							// }
+						}
+					}
+				}
+			]
 		}
 	]
 }

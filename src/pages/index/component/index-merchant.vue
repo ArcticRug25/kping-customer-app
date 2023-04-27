@@ -1,6 +1,8 @@
 <template>
   <view>
-    <view class="k-w-94vw k-rounded-2 k-bg-white k-mx-auto k-overflow-hidden">
+    <view
+      class="k-w-94vw k-rounded-2 k-bg-white k-mx-auto k-overflow-hidden"
+      @click="goPage('/pages/merchant/detail/index')">
       <view class="k-relative k-h-200">
         <image
           class="k-w-full k-h-full"
@@ -53,4 +55,10 @@
 defineOptions({
   name: 'IndexMerchant',
 })
+
+const goPage = (url: string) => {
+  uni.navigateTo({
+    url,
+  })
+}
 </script>
