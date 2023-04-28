@@ -1,16 +1,17 @@
 <template>
-  <tm-app>
+  <tm-app class="k-overflow-hidden">
     <view class="k-w-100vw k-relative">
       <!-- 商家图片 -->
       <view class="merchant-bg-img k-absolute k-top-0 k-left-0 k-w-full -k-z1">
         <img
-          class="k-w-full k-object-cover k-h-500"
+          class="k-w-100vw k-object-cover k-h-500"
           src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
       </view>
       <!-- 头部导航栏 -->
       <view
         class="k-w-full k-h-100 k-bg-transparent k-pt-safe k-px-3 k-bg-white"
-        :style="{ backgroundColor: `rgba(255,255,255,${opacity})` }">
+        :style="{ backgroundColor: `rgba(255,255,255,${opacity})` }"
+        @click="goBack">
         <!-- 左 -->
         <view class="k-h-full k-w-100rpx k-flex k-items-center k-relative">
           <view
@@ -28,12 +29,38 @@
         <view></view>
       </view>
       <!-- 商家详情 -->
-      <scroll-view scroll-y="true" class="merchant-container k-w-full k-box-border" @scroll="handleScroll">
-        <view class="k-h-350rpx k-bg-red">22</view>
-        <view class="k-h-350rpx">22</view>
-        <view class="k-h-350rpx k-bg-pink">22</view>
-        <view class="k-h-350rpx">22</view>
-        <view class="k-h-350rpx k-bg-orange">22</view>
+      <scroll-view scroll-y="true" class="merchant-container k-w-full" @scroll="handleScroll">
+        <!-- 商家相册 -->
+        <scroll-view class="k-whitespace-nowrap k-w-full k-h-228 k-pl-2 k-py-2 k-box-border k-bg-white" scroll-x="true">
+          <tm-image
+            id="demo1"
+            :width="280"
+            :height="196"
+            model="scaleToFill"
+            class="k-inline-block k-mr-1 k-rounded-1"
+            src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+          <tm-image
+            id="demo1"
+            :width="280"
+            :height="196"
+            model="scaleToFill"
+            class="k-inline-block k-mr-1 k-rounded-1"
+            src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+          <tm-image
+            id="demo1"
+            :width="280"
+            :height="196"
+            model="scaleToFill"
+            class="k-inline-block k-mr-1 k-rounded-1"
+            src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+        </scroll-view>
+        <!-- 商家信息 -->
+        <view class="k-w-full k-bg-white k-box-border k-px-2">
+          <view>
+            <tm-text :font-size="36">ManDangDang</tm-text>
+          </view>
+        </view>
+        <view class="k-w-full k-h-1200 k-bg-white"> </view>
       </scroll-view>
     </view>
   </tm-app>
@@ -52,6 +79,11 @@ const handleScroll = ({ detail }: any) => {
   const { scrollTop } = detail
   if (scrollTop < 0 || scrollTop > 100) return
   opacity.value = Math.min(scrollTop / 100, 1)
+}
+
+// 返回
+const goBack = () => {
+  uni.navigateBack()
 }
 </script>
 
