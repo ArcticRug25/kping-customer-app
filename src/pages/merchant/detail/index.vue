@@ -57,14 +57,34 @@
             src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
         </scroll-view>
         <!-- 商家信息 -->
-        <view class="k-w-full k-bg-#FEFFFE k-box-border k-px-2">
+        <view class="k-w-full k-bg-#FEFFFE k-box-border k-px-2 k-pb-2">
           <view>
             <tm-text :font-size="36">ManDangDang</tm-text>
           </view>
           <!-- 评分 -->
-          <Rate />
+          <view class="k-flex k-w-full k-items-center k-mt-1">
+            <Rate :rate="4.7" class="" />
+            <tm-text color="#ed6f43" class="k-ml-10rpx">4.7</tm-text>
+            <tm-text color="#2a2a2a" :font-size="20" class="k-ml-16rpx">$60/person</tm-text>
+            <view class="k-flex-1 k-flex k-justify-end">
+              <tm-text color="#2a2a2a" :font-size="20" class="k-justify-self-end">Hot pot</tm-text>
+            </view>
+          </view>
+          <view class="k-bg-#F7F8F7 k-h-1px k-w-full k-my-2"></view>
+          <!-- 营业信息 -->
+          <view>
+            <view class="k-flex k-items-center">
+              <tm-text color="#2a2a2a" class="k-font-600" :font-size="22">Open</tm-text>
+              <tm-text color="#2a2a2a" class="k-ml-2" :font-size="20">11:30-21:00</tm-text>
+            </view>
+            <tm-text color="#2a2a2a" class="k-font-600 k-mt-10rpx" :font-size="22"
+              >15 North Bridge Road #07-01, Singapore 179098</tm-text
+            >
+            <tm-text color="#807F7F" :font-size="20" class="k-mt-10rpx">600m from your location</tm-text>
+          </view>
         </view>
-        <view class="k-w-full k-h-1200 k-bg-#FEFFFE"> </view>
+        <view class="k-bg-#F6F6F6 k-w-100vw k-h-10rpx"></view>
+        <view class="k-bg-#fefffe k-w-full k-h-100"></view>
       </scroll-view>
     </view>
   </tm-app>

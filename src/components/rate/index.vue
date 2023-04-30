@@ -37,7 +37,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<RateProps>(), {
   color: '#ed6f43',
-  rate: 4.8,
+  rate: 4,
   maxRate: 5,
   width: 30,
 })
@@ -45,14 +45,6 @@ const props = withDefaults(defineProps<RateProps>(), {
 const isDecimal = props.rate % 1 !== 0
 
 const fullStarNum = Math.floor(props.rate)
-
-// const isNotHalf = computed(() => {
-//   return isDecimal && props.rate % 1 < 0.5
-// })
-
-// const isHalf = computed(() => {
-//   return isDecimal && props.rate % 1 >= 0.5 && props.rate % 1 < 0.8
-// })
 
 const rateDecimal = computed(() => {
   const res = props.rate.toString().match(/\.(\d)/)
