@@ -31,7 +31,9 @@
       <!-- 商家详情 -->
       <scroll-view scroll-y="true" class="merchant-container k-w-full" @scroll="handleScroll">
         <!-- 商家相册 -->
-        <scroll-view class="k-whitespace-nowrap k-w-full k-h-228 k-pl-2 k-py-2 k-box-border k-bg-white" scroll-x="true">
+        <scroll-view
+          class="k-whitespace-nowrap k-w-full k-h-228 k-pl-2 k-py-2 k-box-border k-bg-#FEFFFE"
+          scroll-x="true">
           <tm-image
             id="demo1"
             :width="280"
@@ -55,25 +57,29 @@
             src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
         </scroll-view>
         <!-- 商家信息 -->
-        <view class="k-w-full k-bg-white k-box-border k-px-2">
+        <view class="k-w-full k-bg-#FEFFFE k-box-border k-px-2">
           <view>
             <tm-text :font-size="36">ManDangDang</tm-text>
           </view>
+          <!-- 评分 -->
+          <Rate />
         </view>
-        <view class="k-w-full k-h-1200 k-bg-white"> </view>
+        <view class="k-w-full k-h-1200 k-bg-#FEFFFE"> </view>
       </scroll-view>
     </view>
   </tm-app>
 </template>
 
 <script lang="ts" setup>
+import Rate from '@/components/rate/index.vue'
+
 defineOptions({
   name: 'MerchantDetailPage',
 })
 
 // 透明度
 const opacity = ref(0)
-
+const red = ref('red')
 // 滚动事件
 const handleScroll = ({ detail }: any) => {
   const { scrollTop } = detail
