@@ -84,7 +84,19 @@
           </view>
         </view>
         <view class="k-bg-#F6F6F6 k-w-100vw k-h-10rpx"></view>
-        <view class="k-bg-#fefffe k-w-full k-h-100"></view>
+        <!-- 店铺优惠 -->
+        <view class="k-bg-#fefffe k-w-100vw k-relative">
+          <view class="k-w-full k-h-80rpx k-flex k-justify-evenly k-items-center k-sticky k-top-0 k-left-0">
+            <view class="k-relative" v-for="(navItem, index) in navItems" :key="index">
+              <tm-text class="k-font-600 k-transition" :font-size="activeNavItem === index ? 33 : 30">{{
+                navItem.title
+              }}</tm-text>
+              <view
+                v-if="activeNavItem === index"
+                class="k-w-full k-h-9 k-bg-orange k-absolute k-bottom-6 -k-z1 k-bg-gradient-to-r k-from-#EA3300 k-to-#F3B368"></view
+            ></view>
+          </view>
+        </view>
       </scroll-view>
     </view>
   </tm-app>
@@ -96,6 +108,17 @@ import Rate from '@/components/rate/index.vue'
 defineOptions({
   name: 'MerchantDetailPage',
 })
+
+const navItems = reactive([
+  {
+    title: 'Available',
+  },
+  {
+    title: 'Product',
+  },
+])
+
+const activeNavItem = ref(0)
 
 // 透明度
 const opacity = ref(0)
