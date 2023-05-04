@@ -1,6 +1,7 @@
 <template>
   <view
-    class="scroll-view-item k-w-94% k-mx-auto k-box-border k-py-16rpx k-mt-2 k-bg-white k-rounded-2 k-h-160rpx k-flex">
+    class="scroll-view-item k-w-94% k-mx-auto k-box-border k-py-16rpx k-mt-2 k-rounded-2 k-h-160rpx k-flex"
+    :style="{ backgroundColor: props.bgColor }">
     <view class="voucher-left k-basis-68% k-box-border k-flex k-px-14rpx">
       <view class="k-h-128rpx k-w-128rpx k-rounded-1 k-overflow-hidden k-shadow-md">
         <image class="k-full" src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
@@ -27,9 +28,21 @@
 </template>
 
 <script setup lang="ts">
+interface VoucherItemProp {
+  bgColor?: string
+  circleColor?: string
+}
 defineOptions({
   name: 'VoucherItem',
+  inheritAttrs: true,
 })
+
+const props = withDefaults(defineProps<VoucherItemProp>(), {
+  bgColor: '#ffffff',
+  circleColor: '#ffffff',
+})
+
+const circleColor = ref(props.circleColor)
 </script>
 
 <style lang="scss" scoped>
@@ -45,7 +58,7 @@ defineOptions({
       display: inline-block;
       width: 24rpx;
       height: 24rpx;
-      background: #eb4953;
+      background: v-bind(circleColor);
       border-radius: 45%;
       left: -12rpx;
       z-index: 1;

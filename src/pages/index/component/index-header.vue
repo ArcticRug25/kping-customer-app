@@ -41,6 +41,7 @@
       </view>
       <view
         class="i-bi-qr-code-scan k-w-70 k-mx2 k-ease-in k-duration-300"
+        @tap="handleScanCode"
         :style="{ color: isDark ? '#000' : '#fff' }" />
     </view>
   </view>
@@ -58,6 +59,15 @@ defineProps<{
 const navigateToOtherPage = (path: string) => {
   uni.navigateTo({
     url: path,
+  })
+}
+
+// 扫码
+const handleScanCode = () => {
+  uni.scanCode({
+    success: (res) => {
+      console.log(res)
+    },
   })
 }
 </script>
