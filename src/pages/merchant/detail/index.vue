@@ -139,7 +139,28 @@
                   model="scaleToFill"
                   class="k-rounded-1"
                   src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-                <tm-text :font-size="26" class="k-font-600 k-mt-1">Pot hot</tm-text>
+                <view>
+                  <tm-text>Top Pick</tm-text>
+                </view>
+                <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
+              </view>
+              <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
+                <tm-image
+                  :width="270"
+                  :height="180"
+                  model="scaleToFill"
+                  class="k-rounded-1"
+                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
+              </view>
+              <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
+                <tm-image
+                  :width="270"
+                  :height="180"
+                  model="scaleToFill"
+                  class="k-rounded-1"
+                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
               </view>
             </scroll-view>
           </view>
