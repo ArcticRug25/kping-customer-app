@@ -181,7 +181,7 @@ defineOptions({
 
 const navItems = reactive([
   {
-    title: 'Available2',
+    title: 'Available',
   },
   {
     title: 'Product',
