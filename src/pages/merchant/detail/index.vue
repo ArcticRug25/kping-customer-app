@@ -184,7 +184,7 @@ const navItems = reactive([
     title: 'Available',
   },
   {
-    title: 'Product2',
+    title: 'Product',
   },
 ])
 
