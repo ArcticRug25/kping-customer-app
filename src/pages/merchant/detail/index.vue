@@ -133,34 +133,20 @@
               class="k-whitespace-nowrap k-w-full k-h-255 k-pl-2 k-py-2 k-box-border k-bg-#FEFFFE"
               scroll-x="true">
               <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
-                <tm-image
-                  :width="270"
-                  :height="180"
-                  model="scaleToFill"
-                  class="k-rounded-1"
-                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-                <view>
-                  <tm-text>Top Pick</tm-text>
+                <view class="k-rounded-1 k-overflow-hidden">
+                  <tm-image
+                    :width="270"
+                    :height="180"
+                    model="scaleToFill"
+                    class="k-rounded-1"
+                    src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                  <view class="k-bg-black k-absolute k-top-0">
+                    <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center"
+                      >Top Pick</tm-text
+                    >
+                  </view>
                 </view>
-                <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
-              </view>
-              <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
-                <tm-image
-                  :width="270"
-                  :height="180"
-                  model="scaleToFill"
-                  class="k-rounded-1"
-                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-                <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
-              </view>
-              <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
-                <tm-image
-                  :width="270"
-                  :height="180"
-                  model="scaleToFill"
-                  class="k-rounded-1"
-                  src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-                <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
+                <tm-text class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
               </view>
             </scroll-view>
           </view>
