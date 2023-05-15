@@ -119,39 +119,179 @@
           <view class="k-bg-#F6F6F6 k-w-100vw k-h-10rpx"></view>
           <!-- 商品 -->
           <view class="k-w-full k-box-border k-py-2">
-            <!-- 标题 -->
-            <view class="k-w-full k-box-border k-px-2">
-              <view class="k-flex k-items-center">
-                <view class="k-bg-#EC6F44 k-w-36rpx k-h-36rpx k-center k-rounded-5rpx">
-                  <tm-text class="i-bi-cart-fill k-text-white k-text-26"></tm-text>
-                </view>
-                <tm-text :font-size="26" class="k-ml-10rpx k-font-600">Merchant's recommendations</tm-text>
-              </view>
-            </view>
             <!-- 商家推荐 -->
-            <scroll-view
-              class="k-whitespace-nowrap k-w-full k-h-255 k-pl-2 k-py-2 k-box-border k-bg-#FEFFFE"
-              scroll-x="true">
-              <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
-                <view class="k-rounded-1 k-overflow-hidden">
-                  <tm-image
-                    :width="270"
-                    :height="180"
-                    model="scaleToFill"
-                    class="k-rounded-1"
-                    src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
-                  <view class="k-bg-black k-absolute k-top-0">
-                    <tm-text :font-size="26" class="k-font-600 k-mt-1 k-items-center k-justify-center"
-                      >Top Pick</tm-text
-                    >
+            <view>
+              <!-- 标题 -->
+              <view class="k-w-full k-box-border k-px-2">
+                <view class="k-flex k-items-center">
+                  <view class="k-bg-#EC6F44 k-w-36rpx k-h-36rpx k-center k-rounded-5rpx">
+                    <tm-text class="i-bi-cart-fill k-text-white k-text-26"></tm-text>
+                  </view>
+                  <tm-text :font-size="26" class="k-ml-10rpx k-font-600">Merchant's recommendations</tm-text>
+                </view>
+              </view>
+              <!-- 菜品 -->
+              <scroll-view
+                class="k-whitespace-nowrap k-w-full k-h-255 k-pl-2 k-py-2 k-box-border k-bg-#FEFFFE"
+                scroll-x="true">
+                <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
+                  <view class="k-rounded-1 k-overflow-hidden">
+                    <tm-image
+                      :width="270"
+                      :height="180"
+                      model="scaleToFill"
+                      class="k-rounded-1"
+                      src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                    <view class="k-bg-black k-absolute k-top-0 k-rounded-tl-1 k-py-4rpx k-px-1">
+                      <tm-text :font-size="24" color="#DFBF8D" class="k-items-center k-justify-center"
+                        >Top Pick</tm-text
+                      >
+                    </view>
+                  </view>
+                  <tm-text class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
+                </view>
+                <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
+                  <view class="k-rounded-1 k-overflow-hidden">
+                    <tm-image
+                      :width="270"
+                      :height="180"
+                      model="scaleToFill"
+                      class="k-rounded-1"
+                      src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                    <view class="k-bg-black k-absolute k-top-0 k-rounded-tl-1 k-py-4rpx k-px-1">
+                      <tm-text :font-size="24" color="#DFBF8D" class="k-items-center k-justify-center"
+                        >Top Pick</tm-text
+                      >
+                    </view>
+                  </view>
+                  <tm-text class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
+                </view>
+                <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
+                  <view class="k-rounded-1 k-overflow-hidden">
+                    <tm-image
+                      :width="270"
+                      :height="180"
+                      model="scaleToFill"
+                      class="k-rounded-1"
+                      src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                    <view class="k-bg-black k-absolute k-top-0 k-rounded-tl-1 k-py-4rpx k-px-1">
+                      <tm-text :font-size="24" color="#DFBF8D" class="k-items-center k-justify-center"
+                        >Top Pick</tm-text
+                      >
+                    </view>
+                  </view>
+                  <tm-text class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
+                </view>
+              </scroll-view>
+            </view>
+            <view class="k-bg-#F6F6F6 k-w-100vw k-h-10rpx"></view>
+            <!-- 网友推荐 -->
+            <view class="k-w-full k-box-border k-py2">
+              <!-- 标题 -->
+              <view class="k-w-full k-box-border k-px-2">
+                <view class="k-flex k-items-center">
+                  <view class="k-bg-#EC6F44 k-w-36rpx k-h-36rpx k-center k-rounded-5rpx">
+                    <tm-text class="i-bi-cart-fill k-text-white k-text-26"></tm-text>
+                  </view>
+                  <tm-text :font-size="26" class="k-ml-10rpx k-font-600">Net friend's recommendations</tm-text>
+                </view>
+              </view>
+              <!-- 菜品 -->
+              <view class="k-w-full k-box-border k-px-2 k-mt-2">
+                <view class="k-flex k-items-center k-w-full">
+                  <!-- 商品图片 -->
+                  <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
+                    <view class="k-rounded-1 k-overflow-hidden k-relative">
+                      <tm-image
+                        :width="270"
+                        :height="180"
+                        model="scaleToFill"
+                        class="k-rounded-1"
+                        src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                      <view class="k-bg-#C14529 k-absolute k-top-0 k-rounded-tl-1 k-py-4rpx k-px-1">
+                        <tm-text :font-size="26" color="#FEFDFD" class="k-font-600 k-items-center k-justify-center"
+                          >Top 1</tm-text
+                        >
+                      </view>
+                    </view>
+                  </view>
+                  <!-- 商品信息 -->
+                  <view class="k-flex-1 k-relative k-flex k-ml-1 k-flex-col k-h-180">
+                    <!-- 商品名 -->
+                    <view>
+                      <tm-text color="#2a2a2a" :font-size="25" class="">Hot Pot</tm-text>
+                    </view>
+                    <!-- 商品价格 -->
+                    <view class="k-mt-4rpx">
+                      <tm-text color="#2a2a2a" :font-size="25" class="">$78</tm-text>
+                    </view>
+                    <!-- 商品标签 -->
+                    <view class="k-mt-2 k-flex k-gap-1">
+                      <view class="k-bg-#F6F6F6 k-inline-block k-rounded-4rpx k-px-1 k-py-2rpx">
+                        <tm-text color="#2a2a2a" :font-size="25" class="">recommend</tm-text></view
+                      >
+                      <view class="k-bg-#F6F6F6 k-inline-block k-rounded-4rpx k-px-1 k-py-2rpx">
+                        <tm-text color="#2a2a2a" :font-size="25" class="">hot</tm-text></view
+                      >
+                    </view>
+                    <!-- 点赞推荐 -->
+                    <view
+                      class="k-absolute k-right-0 k-top-0 k-border-1 k-border-#B7B7B7 k-rounded-12 k-w-120 k-h-50 k-center">
+                      <view class="i-bi-hand-thumbs-up k-mr-10rpx"></view>
+                      <tm-text color="#B7B7B7" :font-size="24">30</tm-text>
+                    </view>
                   </view>
                 </view>
-                <tm-text class="k-font-600 k-mt-1 k-items-center k-justify-center">Pot hot</tm-text>
+                <view class="k-bg-#F7F8F7 k-h-1px k-w-full k-my-3"></view>
+                <view class="k-flex k-items-center k-w-full">
+                  <!-- 商品图片 -->
+                  <view class="k-inline-block k-mr-1 k-w-270rpx k-text-center">
+                    <view class="k-rounded-1 k-overflow-hidden k-relative">
+                      <tm-image
+                        :width="270"
+                        :height="180"
+                        model="scaleToFill"
+                        class="k-rounded-1"
+                        src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/6cd28202211111537271692.jpg" />
+                      <view class="k-bg-#C14529 k-absolute k-top-0 k-rounded-tl-1 k-py-4rpx k-px-1">
+                        <tm-text :font-size="26" color="#FEFDFD" class="k-font-600 k-items-center k-justify-center"
+                          >Top 1</tm-text
+                        >
+                      </view>
+                    </view>
+                  </view>
+                  <!-- 商品信息 -->
+                  <view class="k-flex-1 k-relative k-flex k-ml-1 k-flex-col k-h-180">
+                    <!-- 商品名 -->
+                    <view>
+                      <tm-text color="#2a2a2a" :font-size="25" class="">Hot Pot</tm-text>
+                    </view>
+                    <!-- 商品价格 -->
+                    <view class="k-mt-4rpx">
+                      <tm-text color="#2a2a2a" :font-size="25" class="">$78</tm-text>
+                    </view>
+                    <!-- 商品标签 -->
+                    <view class="k-mt-2 k-flex k-gap-1">
+                      <view class="k-bg-#F6F6F6 k-inline-block k-rounded-4rpx k-px-1 k-py-2rpx">
+                        <tm-text color="#2a2a2a" :font-size="25" class="">recommend</tm-text></view
+                      >
+                      <view class="k-bg-#F6F6F6 k-inline-block k-rounded-4rpx k-px-1 k-py-2rpx">
+                        <tm-text color="#2a2a2a" :font-size="25" class="">hot</tm-text></view
+                      >
+                    </view>
+                    <!-- 点赞推荐 -->
+                    <view
+                      class="k-absolute k-right-0 k-top-0 k-border-1 k-border-#B7B7B7 k-rounded-12 k-w-120 k-h-50 k-center">
+                      <view class="i-bi-hand-thumbs-up k-mr-10rpx"></view>
+                      <tm-text color="#B7B7B7" :font-size="24">30</tm-text>
+                    </view>
+                  </view>
+                </view>
               </view>
-            </scroll-view>
+            </view>
           </view>
         </view>
-        <view w-100vw h-2000></view>
+        <!-- <view w-100vw h-2000></view> -->
       </scroll-view>
     </view>
   </tm-app>
