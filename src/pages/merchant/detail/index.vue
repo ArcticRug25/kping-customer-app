@@ -10,7 +10,7 @@
       <!-- 头部导航栏 -->
       <view
         class="k-w-full k-h-100 k-bg-transparent k-pt-safe k-px-3 k-bg-white"
-        :style="{ backgroundColor: `rgba(255,255,255,${opacity})` }"
+        :style="{ backgroundColor: `rgba(255,255,255,${opacity})`, paddingTop: statusBarHeight + 'px' }"
         @click="goBack">
         <!-- 左 -->
         <view class="k-h-full k-w-100rpx k-flex k-items-center k-relative">
@@ -316,6 +316,8 @@ interface MerchantNavItem {
   id: string
 }
 
+const { statusBarHeight } = uni.$tm.u.getWindow()
+
 const navItems = reactive<MerchantNavItem[]>([
   {
     title: 'Available',
@@ -360,6 +362,7 @@ const goBack = () => {
 <style lang="scss" scoped>
 .merchant-container {
   height: calc(100vh - 100rpx - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  /* overscroll-behavior-y: contain; */
 }
 
 .merchant-bg-img {

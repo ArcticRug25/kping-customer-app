@@ -1,6 +1,6 @@
 {
     "name" : "kping-customer-app",
-    "appid" : "__UNI__DA16D5F",
+    "appid" : "__UNI__ED438F3",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -18,10 +18,10 @@
         "modules" : {
             "Canvas" : "nvue canvas"
         },
-        "safearea": {
-            "bottom": {  
-                  "offset": "none" 
-              }   
+        "safearea" : {
+            "bottom" : {
+                "offset" : "none"
+            }
         },
         "distribute" : {
             "android" : {

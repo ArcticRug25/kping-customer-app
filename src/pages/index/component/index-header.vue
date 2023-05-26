@@ -1,7 +1,7 @@
 <template>
   <view
     :class="{ 'is-dark': isDark }"
-    class="k-pt-safe k-h-200 k-w-full k-ease-in k-duration-300 k-bg-transparent k-fixed k-z-999">
+    class="k-h-200 k-w-full k-ease-in k-duration-300 k-bg-transparent k-fixed k-z-999">
     <!-- 头部功能栏 -->
     <view class="k-my-2 k-flex k-items-center">
       <view class="kping-logo k-pt-1">

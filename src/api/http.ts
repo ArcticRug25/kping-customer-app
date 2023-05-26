@@ -11,13 +11,12 @@ const instance = axios.create({
   // #endif
   // #ifndef H5
   // @ts-ignore
-  baseURL: 'https://service-rbji0bev-1256505457.cd.apigw.tencentcs.com/release',
+  baseURL: 'https://test.kping.sg',
   // #endif
   adapter(config) {
     console.log('request adapter ↓↓')
     console.log(config)
-    const { url, method, data, params, headers, baseURL, paramsSerializer } =
-      config
+    const { url, method, data, params, headers, baseURL, paramsSerializer } = config
     return new Promise((resolve, reject) => {
       uni.request({
         method: method!.toUpperCase() as any,
@@ -33,10 +32,10 @@ const instance = axios.create({
         },
         fail: (err: any) => {
           reject(err)
-        }
+        },
       })
     })
-  }
+  },
 })
 
 /**
@@ -46,7 +45,7 @@ instance.interceptors.request.use((config) => {
   const { method, params } = config
   // 附带鉴权的token
   const headers: any = {
-    token: uni.getStorageSync('token')
+    token: uni.getStorageSync('token'),
   }
   // 不缓存get请求
   if (method === 'get') {
@@ -57,13 +56,13 @@ instance.interceptors.request.use((config) => {
     headers['Content-type'] = 'application/json;'
     Object.assign(config, {
       data: params,
-      params: {}
+      params: {},
     })
   }
 
   return {
     ...config,
-    headers
+    headers,
   }
 })
 

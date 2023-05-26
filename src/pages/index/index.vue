@@ -1,9 +1,9 @@
 <template>
   <tm-app ref="appRef">
-    <IndexHeader :isDark="isDark" />
+    <IndexHeader :isDark="isDark" :style="{ 'padding-top': statusBarHeight + 'px' }" />
     <view
-      class="index-header k-pt-safe k-relative k-overflow-hidden k-w-100vw k-h-180"
-      :style="{ height: listimg.length ? '630rpx' : '180rpx' }">
+      class="index-header k-relative k-overflow-hidden k-w-100vw"
+      :style="{ height: listimg.length ? 630 + statusBarHeight * 2 + 'rpx' : 200 + statusBarHeight * 2 + 'rpx' }">
       <!-- 背景图 -->
       <view class="header-bg-img k-absolute k-w-full k-h-full k-top-0 k-overflow-hidden">
         <!-- #ifdef APP-PLUS  -->
@@ -16,7 +16,10 @@
         <!-- #endif -->
       </view>
       <!-- 轮播图 -->
-      <view v-if="listimg.length" class="header-carousel k-box-border k-mt-[200rpx]">
+      <view
+        v-if="listimg.length"
+        class="header-carousel k-box-border"
+        :style="{ marginTop: 200 + statusBarHeight * 2 + 'rpx' }">
         <tm-carousel
           :height="400"
           :duration="1200"
@@ -109,11 +112,7 @@ onPageScroll(({ scrollTop }) => {
 
 // #ifdef APP-PLUS
 watch(isDark, (val) => {
-  if (plus.os.name === 'iOS') {
-    val ? plus.navigator.setStatusBarStyle('dark') : plus.navigator.setStatusBarStyle('light')
-  } else if (plus.os.name === 'Android') {
-    val ? plus.navigator.setStatusBarBackground('#fff') : plus.navigator.setStatusBarBackground('#000')
-  }
+  val ? plus.navigator.setStatusBarStyle('dark') : plus.navigator.setStatusBarStyle('light')
 })
 // #endif
 </script>
