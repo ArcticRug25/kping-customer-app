@@ -8,10 +8,10 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#ffffff",
 				// #ifdef APP-PLUS
-				"enablePullDownRefresh": true,
+				"enablePullDownRefresh": false,
 				// #endif
 				"app-plus": {
-					"scrollIndicator": "none" //禁用原生导航栏
+					"scrollIndicator": "none" 
 				}
 			}
 		},
@@ -22,10 +22,10 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#ffffff",
 				// #ifdef APP-PLUS
-				"enablePullDownRefresh": true,
+				"enablePullDownRefresh": false,
 				// #endif
 				"app-plus": {
-					"scrollIndicator": "none" //禁用原生导航栏
+					"scrollIndicator": "none"
 				}
 			}
 		},
@@ -98,6 +98,23 @@
 				"app-plus": {
 					"animationType": "slide-in-bottom",
 					"popGesture": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/ad/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#ffffff",
+				"enablePullDownRefresh": false,
+				"disableScroll": true,
+				"disableSwipeBack": true,
+				"app-plus": {
+					"animationType": "slide-in-bottom",
+					"popGesture": "none",
+					"scrollIndicator": "none",
+					"bounce": "none"
 				}
 			}
 		}
@@ -187,9 +204,9 @@
 			"pages": [
 				{
 					"path": "merchant/detail/index",
-					"style":{
+					"style": {
 						"navigationStyle": "custom",
-						"app-plus":{
+						"app-plus": {
 							"bounce": "none"
 							// "titleNView":{
 							// 	"type":"transparent",
