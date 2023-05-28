@@ -11,7 +11,7 @@
 				"enablePullDownRefresh": false,
 				// #endif
 				"app-plus": {
-					"scrollIndicator": "none" 
+					"scrollIndicator": "none"
 				}
 			}
 		},
@@ -217,6 +217,30 @@
 							// 		}
 							// 	]
 							// }
+						}
+					}
+				}
+			]
+		},
+		{
+			"root": "pages",
+			"pages": [
+				{
+					"path": "fb/index",
+					"style": {
+						"navigationBarTitleText": "fb",
+						"titleNView":{
+							"searchInput":{
+								"borderRadius": "15px",
+								"placeholder": "Search for you want"
+							},
+							"buttons":[
+								{
+									"text":"Search",
+									"fontSize": "16px",
+									"width": "48px"
+								}
+							]
 						}
 					}
 				}

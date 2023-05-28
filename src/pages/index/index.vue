@@ -84,7 +84,7 @@ const indexNavData = [
   {
     name: 'F&B',
     icon: 'i-bi-handbag-fill',
-    path: '/pages/ad/index',
+    path: '/pages/fb/index',
     color: 'linear-gradient(180deg, #FAE19E 0%, #F4BC5D 100%)',
   },
 ]

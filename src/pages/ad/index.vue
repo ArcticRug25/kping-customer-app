@@ -19,7 +19,7 @@
         class="k-absolute k-top-0 k-rounded-12 k-center k-py-14rpx k-px-1 k-bg-black k-text-#CBCBCB k-bg-opacity-25 k-border-1 k-border-#f5f5f5 k-right-0 k-m-4 k-z99"
         :style="{ top: statusBarHeight + 'px' }">
         <cover-view class="k-w-90 k-flex k-text-center k-text-sm">{{
-          videoCountdown < 0 ? 0 : videoCountdown + 's'
+          videoCountdown <= 0 ? 0 + 's' : videoCountdown + 's'
         }}</cover-view>
         <cover-view class="k-h-30 k-w-1 k-bg-#CBCBCB"></cover-view>
         <cover-view
