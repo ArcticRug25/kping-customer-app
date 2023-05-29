@@ -6,18 +6,23 @@
       class="k-w-30 k-h-30 k-rounded-4rpx k-center"
       :style="{
         backgroundColor: props.color,
+        width: props.width + 'rpx',
+        height: props.width + 'rpx',
       }">
       <view class="i-bi-star-fill k-text-22rpx k-text-#FEFEFE"></view>
     </view>
     <template v-if="isDecimal && rateDecimal > 0">
-      <view class="k-w-30 k-h-30 k-rounded-4rpx k-center" :style="{ background: rateBgColor }">
+      <view
+        class="k-w-30 k-h-30 k-rounded-4rpx k-center"
+        :style="{ background: rateBgColor, width: props.width + 'rpx', height: props.width + 'rpx' }">
         <view class="i-bi-star-fill k-text-22rpx k-text-#FEFEFE"></view> </view
     ></template>
     <template v-if="maxRate !== fullStarNum">
       <view
         v-for="item in maxRate - fullStarNum - (isDecimal ? 1 : 0)"
         :key="item"
-        class="k-w-30 k-h-30 k-rounded-4rpx k-center k-bg-#C7C7C7">
+        class="k-w-30 k-h-30 k-rounded-4rpx k-center k-bg-#C7C7C7"
+        :style="{ width: props.width + 'rpx', height: props.width + 'rpx' }">
         <view class="i-bi-star-fill k-text-22rpx k-text-#FEFEFE"></view>
       </view>
     </template>

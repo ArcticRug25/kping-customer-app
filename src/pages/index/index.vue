@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { onPageScroll } from '@dcloudio/uni-app'
+import { onPageScroll, onShow } from '@dcloudio/uni-app'
 import IndexBanner from './component/index-banner.vue'
 import IndexHeader from './component/index-header.vue'
 import IndexMerchant from './component/index-merchant.vue'
@@ -78,7 +78,7 @@ const indexNavData = [
   {
     name: 'Vouchers',
     icon: 'i-bi-ticket-detailed-fill',
-    path: '/pages/mask/voucherModal',
+    path: '/pages/voucher/index',
     color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
   },
   {
@@ -97,10 +97,20 @@ const navigateToOtherPage = (path: string) => {
     url: path,
   })
 }
+const a = ref(0)
 
-// uni.navigateTo({
-//   url: '/pages/mask/voucherModal',
-// })
+onShow(() => {
+  uni.$on('skipAd', () => {
+    a.value = 1
+    uni.navigateTo({
+      url: '/pages/mask/voucherModal',
+    })
+  })
+})
+
+uni.navigateTo({
+  url: '/pages/ad/index',
+})
 
 onPageScroll(({ scrollTop }) => {
   if (scrollTop >= uni.$tm.u.topx(100) + statusBarHeight) {

@@ -22,9 +22,7 @@
           videoCountdown <= 0 ? 0 + 's' : videoCountdown + 's'
         }}</cover-view>
         <cover-view class="k-h-30 k-w-1 k-bg-#CBCBCB"></cover-view>
-        <cover-view
-          class="k-w-90 k-flex k-text-center k-text-sm k-relative k-z99"
-          @tap="navigateToOtherPage('/pages/index/index')"
+        <cover-view class="k-w-90 k-flex k-text-center k-text-sm k-relative k-z99" @tap="navigateToOtherPage()"
           >Skip</cover-view
         >
       </cover-view>
@@ -43,7 +41,8 @@ const videoTimeUpdateEvent = (e: any) => {
 
   videoCountdown.value = (duration - currentTime).toFixed(0)
 }
-const navigateToOtherPage = (path: string) => {
+const navigateToOtherPage = () => {
+  uni.$emit('skipAd')
   uni.navigateBack()
 }
 </script>
