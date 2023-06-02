@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-import { onPageScroll, onShow } from '@dcloudio/uni-app'
+import { onLoad, onPageScroll, onShow, onUnload } from '@dcloudio/uni-app'
 import IndexBanner from './component/index-banner.vue'
 import IndexHeader from './component/index-header.vue'
 import IndexMerchant from './component/index-merchant.vue'
@@ -97,15 +97,25 @@ const navigateToOtherPage = (path: string) => {
     url: path,
   })
 }
-const a = ref(0)
+const adEnded = ref(false)
+
+onLoad(() => {
+  uni.$on('skipAd', () => {
+    adEnded.value = true
+  })
+})
 
 onShow(() => {
-  uni.$on('skipAd', () => {
-    a.value = 1
+  if (adEnded.value) {
     uni.navigateTo({
       url: '/pages/mask/voucherModal',
     })
-  })
+    adEnded.value = false
+  }
+})
+
+onUnload(() => {
+  uni.$off('skipAd')
 })
 
 uni.navigateTo({
