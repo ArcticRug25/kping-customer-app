@@ -118,9 +118,9 @@ onUnload(() => {
   uni.$off('skipAd')
 })
 
-uni.navigateTo({
-  url: '/pages/ad/index',
-})
+// uni.navigateTo({
+//   url: '/pages/ad/index',
+// })
 
 onPageScroll(({ scrollTop }) => {
   if (scrollTop >= uni.$tm.u.topx(100) + statusBarHeight) {

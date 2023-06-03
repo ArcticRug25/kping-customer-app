@@ -31,11 +31,15 @@
           </view>
           <tm-text :fontSize="26" color="#78828e">Security</tm-text>
         </view>
+
         <view class="k-col-center">
-          <view class="nav-item k-center k-w-80 k-h-80 k-rounded-30rpx k-bg-#D0F2E9 k-mb-3">
-            <image class="k-w-30rpx k-h-37rpx" src="@/static/images/help.png" />
-          </view>
-          <tm-text :fontSize="26" color="#78828e">Help</tm-text>
+          <tm-badge dot color="red">
+            <view
+              class="nav-item k-center k-w-80 k-h-80 k-rounded-30rpx k-bg-gradient-to-b k-from-#B1C5FA k-to-#7288F7 k-mb-3">
+              <text class="i-bi-ticket-detailed-fill k-text-white k-text-xl"></text>
+            </view>
+          </tm-badge>
+          <tm-text :fontSize="26" color="#78828e">Voucher</tm-text>
         </view>
       </view>
     </view>
