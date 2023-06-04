@@ -76,9 +76,9 @@ const indexNavData = [
     color: 'linear-gradient(180deg, #F6C89B 0%, #F19A56 100%)',
   },
   {
-    name: 'Vouchers',
-    icon: 'i-bi-ticket-detailed-fill',
-    path: '/pages/voucher/index',
+    name: 'Shopping',
+    icon: 'i-bi-cart-fill',
+    path: '/pages/shop/index',
     color: 'linear-gradient(180deg, #B1C5FA 0%, #7288F7 100%)',
   },
   {
@@ -103,6 +103,11 @@ onLoad(() => {
   uni.$on('skipAd', () => {
     adEnded.value = true
   })
+})
+
+uni.showTabBarRedDot({
+  // 显示红点
+  index: 1, // tabbar下标
 })
 
 onShow(() => {

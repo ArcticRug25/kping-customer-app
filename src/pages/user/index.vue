@@ -12,13 +12,13 @@
           <tm-text class="k-mb-2" :fontSize="36" color="#fff">ArcticRug25</tm-text>
           <tm-text :fontSize="28" color="#fff">18971330757</tm-text>
         </view>
-        <view v-else class="k-flex k-flex-col k-justify-center" @click="toLogin">
+        <view v-else class="k-flex k-flex-col k-justify-center" @click="navTo('login')">
           <tm-text class="k-mb-2" :fontSize="36" color="#fff">Login/Register</tm-text>
         </view>
       </view>
       <!-- 导航栏 -->
       <view
-        class="k-flex k-justify-around k k-absolute -k-bottom-61rpx k-w-686 k-h-228 k-mx-auto k-bg-white k-flex k-rounded-5 k-shadow-[0_6rpx_20rpx_rgba(64,128,255,0.1)]">
+        class="k-flex k-justify-around k-absolute -k-bottom-61rpx k-w-686 k-h-228 k-mx-auto k-bg-white k-flex k-rounded-5 k-shadow-[0_6rpx_20rpx_rgba(64,128,255,0.1)]">
         <view class="k-col-center">
           <view class="nav-item k-center k-w-80 k-h-80 k-rounded-30rpx k-bg-#F7D3B7 k-mb-3">
             <image class="k-w-30rpx k-h-37rpx" src="@/static/images/notice.png" />
@@ -31,9 +31,8 @@
           </view>
           <tm-text :fontSize="26" color="#78828e">Security</tm-text>
         </view>
-
-        <view class="k-col-center">
-          <tm-badge dot color="red">
+        <view class="k-col-center" @tap="navTo('voucher')">
+          <tm-badge dot color="red" :round="26">
             <view
               class="nav-item k-center k-w-80 k-h-80 k-rounded-30rpx k-bg-gradient-to-b k-from-#B1C5FA k-to-#7288F7 k-mb-3">
               <text class="i-bi-ticket-detailed-fill k-text-white k-text-xl"></text>
@@ -83,9 +82,9 @@ const authTo = (url: string) => {
   })
 }
 
-const toLogin = () => {
+const navTo = (url: string) => {
   uni.navigateTo({
-    url: '/pages/login/index',
+    url: `/pages/${url}/index`,
   })
 }
 

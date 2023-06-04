@@ -29,7 +29,6 @@
 				}
 			}
 		},
-
 		{
 			"path": "pages/axios/index",
 			"style": {
@@ -98,6 +97,19 @@
 					"popGesture": "none",
 					"scrollIndicator": "none",
 					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/shop/index",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationStyle": "custom",
+				// #ifdef APP-PLUS
+				"enablePullDownRefresh": false,
+				// #endif
+				"app-plus": {
+					"scrollIndicator": "none"
 				}
 			}
 		}
