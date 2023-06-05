@@ -112,6 +112,32 @@
 					"scrollIndicator": "none"
 				}
 			}
+		},
+		{
+			"path": "pages/product/index",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationStyle": "custom",
+				// #ifdef APP-PLUS
+				"enablePullDownRefresh": false,
+				// #endif
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/cart/index",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationStyle": "custom",
+				// #ifdef APP-PLUS
+				"enablePullDownRefresh": false,
+				// #endif
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
 		}
 	],
 	"globalStyle": {
@@ -132,6 +158,12 @@
 				"iconPath": "static/images/1-001.png",
 				"selectedIconPath": "static/images/1-002.png",
 				"text": "Home"
+			},
+			{
+				"pagePath": "pages/cart/index",
+				"iconPath": "static/images/3-001.png",
+				"selectedIconPath": "static/images/3-002.png",
+				"text": "Cart"
 			},
 			{
 				"pagePath": "pages/user/index",

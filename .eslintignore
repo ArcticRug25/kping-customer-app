@@ -1,3 +1,4 @@
 dist
 *.nvue
 *.json
+src/tmui/**/*

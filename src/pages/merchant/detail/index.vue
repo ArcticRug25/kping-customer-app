@@ -9,11 +9,11 @@
       </view>
       <!-- 头部导航栏 -->
       <view
-        class="k-w-full k-h-100 k-bg-transparent k-pt-safe k-px-3 k-bg-white"
+        class="k-w-full k-h-100 k-bg-transparent k-pt-safe k-bg-white"
         :style="{ backgroundColor: `rgba(255,255,255,${opacity})`, paddingTop: statusBarHeight + 'px' }"
         @click="goBack">
         <!-- 左 -->
-        <view class="k-h-full k-w-100rpx k-flex k-items-center k-relative">
+        <view class="k-h-full k-w-100rpx k-flex k-box-border k-px-3 k-items-center k-relative">
           <view
             class="k-w-60 k-h-60 k-center k-rounded-50 k-absolute"
             :style="{ backgroundColor: `rgba(0,0,0, ${0.4 - opacity})` }">

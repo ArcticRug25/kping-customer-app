@@ -20,7 +20,15 @@
     </view>
     <view class="voucher-right k-basis-32% k-box-border k-flex k-flex-col k-items-center k-justify-center">
       <tm-text color="#aaa" :fontSize="24">Expires in 12h</tm-text>
-      <tm-button :width="160" size="mini" :margin="[0, 16, 0, 0]" :height="50" linear="right" :round="25" color="red"
+      <tm-button
+        :width="160"
+        @click="handleClick"
+        size="mini"
+        :margin="[0, 16, 0, 0]"
+        :height="50"
+        linear="right"
+        :round="25"
+        color="red"
         >To Use</tm-button
       >
     </view>
@@ -41,8 +49,12 @@ const props = withDefaults(defineProps<VoucherItemProp>(), {
   bgColor: '#ffffff',
   circleColor: '#ffffff',
 })
-
+const emits = defineEmits(['handleClick'])
 const circleColor = ref(props.circleColor)
+
+const handleClick = () => {
+  emits('handleClick')
+}
 </script>
 
 <style lang="scss" scoped>

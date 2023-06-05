@@ -63,18 +63,18 @@ const listimg = [
 ]
 
 const indexNavData = [
-  {
-    name: 'Charging',
-    icon: 'i-bi-lightning-charge-fill',
-    path: '/pages/street/charge/index',
-    color: 'linear-gradient(180deg, #f3afad 0%, #ee7571 100%)',
-  },
-  {
-    name: 'Street View',
-    icon: 'i-bi-camera-fill',
-    path: '/pages/street/street-view/index',
-    color: 'linear-gradient(180deg, #F6C89B 0%, #F19A56 100%)',
-  },
+  // {
+  //   name: 'Charging',
+  //   icon: 'i-bi-lightning-charge-fill',
+  //   path: '/pages/street/charge/index',
+  //   color: 'linear-gradient(180deg, #f3afad 0%, #ee7571 100%)',
+  // },
+  // {
+  //   name: 'Street View',
+  //   icon: 'i-bi-camera-fill',
+  //   path: '/pages/street/street-view/index',
+  //   color: 'linear-gradient(180deg, #F6C89B 0%, #F19A56 100%)',
+  // },
   {
     name: 'Shopping',
     icon: 'i-bi-cart-fill',
@@ -107,7 +107,7 @@ onLoad(() => {
 
 uni.showTabBarRedDot({
   // 显示红点
-  index: 1, // tabbar下标
+  index: 2, // tabbar下标
 })
 
 onShow(() => {
@@ -123,9 +123,9 @@ onUnload(() => {
   uni.$off('skipAd')
 })
 
-// uni.navigateTo({
-//   url: '/pages/ad/index',
-// })
+uni.navigateTo({
+  url: '/pages/ad/index',
+})
 
 onPageScroll(({ scrollTop }) => {
   if (scrollTop >= uni.$tm.u.topx(100) + statusBarHeight) {

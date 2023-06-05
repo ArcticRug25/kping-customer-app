@@ -44,10 +44,10 @@ const videoTimeUpdateEvent = (e: any) => {
 }
 
 const handleClickAd = () => {
-  uni.showLoading({
-    title: '加载中',
-    mask: true,
-  })
+  // uni.showLoading({
+  //   title: '加载中',
+  //   mask: true,
+  // })
 }
 
 const adEnded = () => {
