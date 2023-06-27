@@ -29,7 +29,10 @@
         focusColor="white"
         showClear>
         <template #left>
-          <view class="k-absolute k-flex k-items-center k-left-45rpx k-z6" @click="handleChooseAreaCode">
+          <view
+            v-show="!isPassword"
+            class="k-absolute k-flex k-items-center k-left-45rpx k-z6"
+            @click="handleChooseAreaCode">
             <view
               class="k-align-middle k-mr-8rpx k-w-90rpx k-text-28rpx k-text-center"
               :style="{ color: areaCode ? '' : '#ccc' }">
@@ -40,20 +43,22 @@
         </template>
       </tm-input>
       <view class="k-py-10rpx"></view>
-      <tm-input
-        v-if="isPassword"
-        :margin="[0, 24]"
-        :height="100"
-        :round="25"
-        :shadow="2"
-        class="login-input k-w-600rpx"
-        password
-        prefix-color="#FEA600"
-        placeholder="Please enter your passport"
-        showClear
-        focusColor="white"
-        prefix="tmicon-lock-fill"></tm-input>
-      <view v-else class="k-flex k-items-center k-justify-between k-w-600rpx">
+      <view v-show="isPassword">
+        <tm-input
+          :margin="[0, 24]"
+          :height="100"
+          :round="25"
+          :shadow="2"
+          v-model="password"
+          class="login-input k-w-600rpx"
+          password
+          prefix-color="#FEA600"
+          placeholder="Please enter your passport"
+          showClear
+          focusColor="white"
+          prefix="tmicon-lock-fill"></tm-input>
+      </view>
+      <view v-show="!isPassword" class="k-flex k-items-center k-justify-between k-w-600rpx">
         <tm-input
           :margin="[0, 24]"
           :height="100"
@@ -101,17 +106,23 @@
 </template>
 
 <script setup lang="ts">
+import { userApi } from '@/api'
 import tmNotification from '@/tmui/components/tm-notification/tm-notification.vue'
 
 defineOptions({
   name: 'LoginPage',
 })
-
-const phone = ref('189')
+const userStore = useUserStore()
+const phone = ref('18971330757')
 // 验证码
 const authCode = ref('')
+// 密码
+const password = ref('wyw123456')
 // 密码登录还是验证码登录
-const isPassword = ref(false)
+const isPassword = ref(true)
+const accountInputML = computed(() => {
+  return isPassword.value ? 0 : '110rpx'
+})
 
 // 手机区域码
 const { areaCode } = toRefs(useUserStore())
@@ -145,7 +156,7 @@ const validateForm = (): boolean => {
     return false
   }
 
-  if (authCode.value.length < 6) {
+  if (!isPassword.value && authCode.value.length < 6) {
     errorTip('Please enter the correct verification code.')
     return false
   }
@@ -168,11 +179,16 @@ const handleChooseAreaCode = () => {
 }
 
 // 登录
-const handleLogin = () => {
+const handleLogin = async () => {
   const isRight = validateForm()
   if (!isRight) return
   if (isPassword.value) {
     // 密码登录
+    const [err, data] = await userApi.login({ username: phone.value, password: password.value })
+    if (err) {
+      return
+    }
+    userStore.token = data.access_token
   } else {
     // 验证码登录
   }
@@ -188,7 +204,7 @@ const handleLogin = () => {
   &.phone-input {
     ::v-deep input {
       position: relative;
-      margin-left: 110rpx;
+      margin-left: v-bind(accountInputML);
     }
   }
 }

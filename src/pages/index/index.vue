@@ -54,6 +54,7 @@ import { onLoad, onPageScroll, onShow, onUnload } from '@dcloudio/uni-app'
 import IndexBanner from './component/index-banner.vue'
 import IndexHeader from './component/index-header.vue'
 import IndexMerchant from './component/index-merchant.vue'
+import http from '../../api/http'
 
 const listimg = [
   'https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/18984202211231016453160.jpg',
@@ -104,7 +105,6 @@ onLoad(() => {
     adEnded.value = true
   })
 })
-
 uni.showTabBarRedDot({
   // 显示红点
   index: 2, // tabbar下标
@@ -112,9 +112,9 @@ uni.showTabBarRedDot({
 
 onShow(() => {
   if (adEnded.value) {
-    uni.navigateTo({
-      url: '/pages/mask/voucherModal',
-    })
+    // uni.navigateTo({
+    //   url: '/pages/mask/voucherModal',
+    // })
     adEnded.value = false
   }
 })
@@ -123,9 +123,9 @@ onUnload(() => {
   uni.$off('skipAd')
 })
 
-uni.navigateTo({
-  url: '/pages/ad/index',
-})
+// uni.navigateTo({
+//   url: '/pages/ad/index',
+// })
 
 onPageScroll(({ scrollTop }) => {
   if (scrollTop >= uni.$tm.u.topx(100) + statusBarHeight) {

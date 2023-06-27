@@ -9,6 +9,7 @@ export const useCode = () => {
     codeStatus.value = true
     countDownTimer = setInterval(() => {
       code.value -= 1
+      userStore.authTime = Date.now()
       if (code.value <= 0) {
         clearInterval(countDownTimer)
         codeStatus.value = false

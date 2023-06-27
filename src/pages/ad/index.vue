@@ -13,7 +13,7 @@
       ref="videoRef"
       playsinlin
       class="k-full k-absolute k-z1"
-      src="https://mallkping.oss-ap-southeast-1.aliyuncs.com/consumer/ad.mov"
+      src="../../static/video/ad.mov"
       autoplay
       object-fit="fill">
       <cover-view class="k-w-100vw k-h-100vh k-relative k-overflow-hidden k-bg-transparent" @click="handleClickAd">

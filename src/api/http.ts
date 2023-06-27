@@ -1,8 +1,127 @@
-import axios from 'axios'
-
+import to from 'await-to-js'
+import axios, { AxiosRequestConfig } from 'axios'
 import { getFullURL } from '@/utils/http'
+import { HTTP_CODE, HTTP_STATUS, RequestEnum } from '@/enum'
+import { getErrorMessage } from '@/utils'
 
-const instance = axios.create({
+interface Result<T = any> {
+  code: number
+  data: T
+  message: string
+}
+
+export default class Axios {
+  private instance
+
+  constructor(config: AxiosRequestConfig) {
+    this.instance = axios.create(config)
+    this.interceptors()
+  }
+
+  public get<T>(config: AxiosRequestConfig) {
+    return this.request<T>({
+      ...config,
+      method: RequestEnum.GET,
+    })
+  }
+
+  public post<T>(config: AxiosRequestConfig) {
+    return this.request<T>({
+      ...config,
+      method: RequestEnum.POST,
+    })
+  }
+
+  public put<T>(config: AxiosRequestConfig) {
+    return this.request<T>({
+      ...config,
+      method: RequestEnum.PUT,
+    })
+  }
+
+  public delete<T>(config: AxiosRequestConfig) {
+    return this.request<T>({
+      ...config,
+      method: RequestEnum.DELETE,
+    })
+  }
+
+  public request<T>(config: AxiosRequestConfig) {
+    return to<T>(
+      new Promise((resolve, reject) => {
+        this.instance
+          .request<T>(config)
+          .then((res) => resolve(res.data))
+          .catch((err) => reject(err))
+      }),
+    )
+  }
+
+  private interceptors() {
+    this.interceptorsRequest()
+    this.interceptorsResponse()
+  }
+
+  private interceptorsRequest() {
+    this.instance.interceptors.request.use((config) => {
+      const { headers } = config
+      if (!headers) throw new Error("Expected 'config' and 'config.headers' not to be undefined")
+
+      const user = useUserStore()
+      if (user.token) headers.Authorization = `Bearer ${user.token}`
+
+      return {
+        ...config,
+        headers,
+      }
+    })
+  }
+
+  private interceptorsResponse() {
+    this.instance.interceptors.response.use(
+      (response) => {
+        const { code } = response.data as Result
+        let { message } = response.data
+        if (code === HTTP_STATUS.success) {
+          return response.data
+        }
+        message = getErrorMessage(message)
+        // ElMessage({
+        //     message,
+        //     type: 'error'
+        // })
+        return Promise.reject(new Error(message || 'Error'))
+      },
+      (error) => {
+        const { code } = error.response?.data || error
+        let { message } = error.response?.data || error
+        if (code === HTTP_CODE.UNAUTHORIZED) {
+          // token 过期
+          const user = useUserStore()
+          user.token = ''
+          window.location.href = '/' // 跳转登录页
+          setTimeout(() => {
+            // ElMessageBox.alert(t('app.loginExpire'), t('app.tips'), {})
+          }, 300)
+        } else if (code === HTTP_CODE.UNPROCESSABLE_ENTITY) {
+          // ElMessage({
+          //     message: t('login.codeError'),
+          //     type: 'error'
+          // })
+        } else {
+          message = getErrorMessage(message)
+          // ElMessage({
+          //     message,
+          //     type: 'error'
+          // })
+        }
+        return Promise.reject(new Error(message || 'Error'))
+      },
+    )
+  }
+}
+
+const http = new Axios({
   // Web 侧可以通过 vite.config.js 中的 proxy 配置，指定代理
   // 小程序APP里需写完整路径，如 https://service-rbji0bev-1256505457.cd.apigw.tencentcs.com/release
   // 可使用条件编译,详见 https://uniapp.dcloud.io/tutorial/platform.html#preprocessor
@@ -11,7 +130,7 @@ const instance = axios.create({
   // #endif
   // #ifndef H5
   // @ts-ignore
-  baseURL: 'https://test.kping.sg',
+  baseURL: import.meta.env.VITE_APP_AXIOS_BASE_URL,
   // #endif
   adapter(config) {
     console.log('request adapter ↓↓')
@@ -38,51 +157,4 @@ const instance = axios.create({
   },
 })
 
-/**
- * 请求拦截
- */
-instance.interceptors.request.use((config) => {
-  const { method, params } = config
-  // 附带鉴权的token
-  const headers: any = {
-    token: uni.getStorageSync('token'),
-  }
-  // 不缓存get请求
-  if (method === 'get') {
-    headers['Cache-Control'] = 'no-cache'
-  }
-  // delete请求参数放入body中
-  if (method === 'delete') {
-    headers['Content-type'] = 'application/json;'
-    Object.assign(config, {
-      data: params,
-      params: {},
-    })
-  }
-
-  return {
-    ...config,
-    headers,
-  }
-})
-
-/**
- * 响应拦截
- */
-instance.interceptors.response.use((v) => {
-  if (v.data?.code === 401) {
-    uni.removeStorageSync('token')
-    // alert('即将跳转登录页。。。', '登录过期')
-    // setTimeout(redirectHome, 1500)
-    return v.data
-  }
-
-  // @ts-ignore
-  if ((v.status || v.statusCode) === 200) {
-    return v.data
-  }
-  // alert(v.statusText, '网络错误')
-  return Promise.reject(v)
-})
-
-export default instance
+export { http }

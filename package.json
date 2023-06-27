@@ -54,6 +54,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-alpha-3071320230411001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-alpha-3071320230411001",
     "@vueuse/core": "^9.13.0",
+    "await-to-js": "^3.0.0",
     "axios": "^0.27.2",
     "cz-git": "^1.4.1",
     "echarts": "5.3.2",
