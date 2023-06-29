@@ -19,13 +19,13 @@
       <!-- 导航栏 -->
       <view
         class="k-flex k-justify-around k-absolute -k-bottom-61rpx k-w-686 k-h-228 k-mx-auto k-bg-white k-flex k-rounded-5 k-shadow-[0_6rpx_20rpx_rgba(64,128,255,0.1)]">
-        <view class="k-col-center">
+        <view class="k-col-center" @click="navToDisabled">
           <view class="nav-item k-center k-w-80 k-h-80 k-rounded-30rpx k-bg-#F7D3B7 k-mb-3">
             <image class="k-w-30rpx k-h-37rpx" src="@/static/images/notice.png" />
           </view>
           <tm-text :fontSize="26" color="#78828e">Message</tm-text>
         </view>
-        <view class="k-col-center">
+        <view class="k-col-center" @click="navToDisabled">
           <view class="nav-item k-center k-w-80 k-h-80 k-rounded-30rpx k-bg-#BCDDFC k-mb-3">
             <image class="k-w-30rpx k-h-37rpx" src="@/static/images/safety.png" />
           </view>
@@ -44,19 +44,19 @@
     </view>
     <!-- 选项设置 -->
     <view class="k-w-686rpx k-mx-auto k-rounded-5 k-mt-110rpx k-shadow-[0_0_20rpx_rgba(64,128,255,0.2)]">
-      <view class="option-item">
+      <view class="option-item" @click="navToDisabled">
         <text class="i-bi-gear"></text>
         <tm-text color="#78828E" :fontSize="28">System setting</tm-text>
       </view>
-      <view class="option-item">
+      <view class="option-item" @click="navToDisabled">
         <text class="i-bi-send"></text>
         <tm-text color="#78828E" :fontSize="28">Push setting</tm-text>
       </view>
-      <view class="option-item">
+      <view class="option-item" @click="navToDisabled">
         <text class="i-bi-telephone-forward"></text>
         <tm-text color="#78828E" :fontSize="28">Contact us</tm-text>
       </view>
-      <view class="option-item">
+      <view class="option-item" @click="navToDisabled">
         <text class="i-bi-exclamation-circle"></text>
         <tm-text color="#78828E" :fontSize="28">About us</tm-text>
       </view>
@@ -72,19 +72,36 @@
 defineOptions({
   name: 'UserPage',
 })
-
+const { token } = storeToRefs(useUserStore())
 // 登录状态
-const isLogin = ref(false)
+const isLogin = ref(!!token.value)
 
+// token.value = ''
 const authTo = (url: string) => {
   uni.navigateTo({
     url: '/pages/mask/authModal',
   })
 }
 
+watch(token, (val) => {
+  isLogin.value = !!val
+})
+
 const navTo = (url: string) => {
+  if (!isLogin.value && url !== 'login') {
+    authTo(url)
+    return
+  }
   uni.navigateTo({
     url: `/pages/${url}/index`,
+  })
+}
+
+// 功能维护中，暂时不可用
+const navToDisabled = () => {
+  uni.showToast({
+    title: 'Coming soon',
+    icon: 'none',
   })
 }
 
@@ -94,6 +111,7 @@ const logOut = () => {
     content: 'Are you sure you want to log out?',
     success: (res) => {
       if (res.confirm) {
+        token.value = ''
         uni.showToast({
           title: 'Log out successfully',
           icon: 'none',

@@ -63,11 +63,20 @@ const navigateToOtherPage = (path: string) => {
 }
 
 // 扫码
-const handleScanCode = () => {
-  uni.scanCode({
-    success: (res) => {
-      console.log(res)
-    },
+const handleScanCode = async () => {
+  const { result } = (await uni.$tm.u.scanCode(false, ['qrCode'])) as UniApp.ScanCodeSuccessRes
+  if (!result) {
+    uni.showToast({
+      title: 'Scan failed',
+      icon: 'error',
+    })
+    return
+  }
+
+  const params = result.split('?')[1]
+
+  uni.navigateTo({
+    url: `/pages/scan-result/index?${params}`,
   })
 }
 </script>

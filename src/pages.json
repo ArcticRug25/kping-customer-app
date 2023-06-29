@@ -139,6 +139,19 @@
 				}
 			}
 		},
+		{
+			"path": "pages/scan-result/index",
+			"style": {
+				"navigationBarTextStyle": "white",
+				"navigationStyle": "custom",
+				// #ifdef APP-PLUS
+				"enablePullDownRefresh": false,
+				// #endif
+				"app-plus": {
+					"scrollIndicator": "none"
+				}
+			}
+		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

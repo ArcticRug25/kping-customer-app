@@ -1,13 +1,21 @@
 import to from 'await-to-js'
 import axios, { AxiosRequestConfig } from 'axios'
 import { getFullURL } from '@/utils/http'
-import { HTTP_CODE, HTTP_STATUS, RequestEnum } from '@/enum'
+import { HTTP_CODE, HTTP_STATUS, RequestEnum, TIP_DURATION } from '@/enum'
 import { getErrorMessage } from '@/utils'
 
 interface Result<T = any> {
   code: number
   data: T
   message: string
+}
+
+function toastError(msg: string) {
+  uni.showToast({
+    title: msg,
+    icon: 'none',
+    duration: TIP_DURATION,
+  })
 }
 
 export default class Axios {
@@ -66,7 +74,6 @@ export default class Axios {
     this.instance.interceptors.request.use((config) => {
       const { headers } = config
       if (!headers) throw new Error("Expected 'config' and 'config.headers' not to be undefined")
-
       const user = useUserStore()
       if (user.token) headers.Authorization = `Bearer ${user.token}`
 
@@ -86,10 +93,7 @@ export default class Axios {
           return response.data
         }
         message = getErrorMessage(message)
-        // ElMessage({
-        //     message,
-        //     type: 'error'
-        // })
+        toastError(message)
         return Promise.reject(new Error(message || 'Error'))
       },
       (error) => {
@@ -104,16 +108,10 @@ export default class Axios {
             // ElMessageBox.alert(t('app.loginExpire'), t('app.tips'), {})
           }, 300)
         } else if (code === HTTP_CODE.UNPROCESSABLE_ENTITY) {
-          // ElMessage({
-          //     message: t('login.codeError'),
-          //     type: 'error'
-          // })
+          toastError(message)
         } else {
           message = getErrorMessage(message)
-          // ElMessage({
-          //     message,
-          //     type: 'error'
-          // })
+          toastError(message)
         }
         return Promise.reject(new Error(message || 'Error'))
       },
@@ -133,8 +131,6 @@ const http = new Axios({
   baseURL: import.meta.env.VITE_APP_AXIOS_BASE_URL,
   // #endif
   adapter(config) {
-    console.log('request adapter ↓↓')
-    console.log(config)
     const { url, method, data, params, headers, baseURL, paramsSerializer } = config
     return new Promise((resolve, reject) => {
       uni.request({
@@ -144,14 +140,8 @@ const http = new Axios({
         data,
         dataType: 'json',
         responseType: config.responseType,
-        success: (res: any) => {
-          console.log('request success ↓↓')
-          console.log(res)
-          resolve(res)
-        },
-        fail: (err: any) => {
-          reject(err)
-        },
+        success: (res: any) => resolve(res),
+        fail: (err: any) => reject(err),
       })
     })
   },

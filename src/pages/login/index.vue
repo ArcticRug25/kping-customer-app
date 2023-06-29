@@ -7,7 +7,8 @@
       <tm-icon
         @click="closeLoginPage"
         color="#9e9e9e"
-        class="k-absolute k-left-40 k-pt-safe k-top-20 k-z3"
+        class="k-absolute k-left-40 k-top-20 k-z3"
+        :style="{ paddingTop: statusBarHeight + 'px' }"
         name="tmicon-times"></tm-icon>
       <view class="k-h-200rpx"></view>
       <view class="k-rounded-50 k-w-156rpx k-h-156rpx k-center k-bg-white k-border-base">
@@ -96,77 +97,122 @@
         @click="handleLogin"
         label="Login"></tm-button>
       <view class="k-flex k-w-600 k-items-center k-py20rpx">
-        <tm-checkbox :size="30" :round="10" color="orange" value="banner" label="I have read and agreed"></tm-checkbox>
+        <tm-checkbox
+          v-model="isAgreed"
+          :size="30"
+          :round="10"
+          color="orange"
+          value="banner"
+          label="I have read and agreed"></tm-checkbox>
         <tm-text class="k-ml-2" color="#FEA600">Privacy Policy</tm-text>
       </view>
     </view>
     <!-- 错误提示 -->
-    <tm-notification color="#E04835" class="error-tip" placement="top" ref="msg" :duration="2000"></tm-notification>
+    <tm-notification
+      color="#E04835"
+      placement="top"
+      ref="notificationRef"
+      :style="{ paddingTop: statusBarHeight + 12 + 'px' }"
+      :duration="2000"></tm-notification>
+    <!-- 全局反馈 -->
+    <tm-message ref="msgRef" :lines="2"></tm-message>
   </tm-app>
 </template>
 
 <script setup lang="ts">
 import { userApi } from '@/api'
 import tmNotification from '@/tmui/components/tm-notification/tm-notification.vue'
+import tmMessage from '@/tmui/components/tm-message/tm-message.vue'
+import { TIP_DURATION } from '../../enum/common'
+import { Member } from '../../api/model/userModel'
 
 defineOptions({
   name: 'LoginPage',
 })
 const userStore = useUserStore()
-const phone = ref('18971330757')
-// 验证码
-const authCode = ref('')
-// 密码
-const password = ref('wyw123456')
-// 密码登录还是验证码登录
-const isPassword = ref(true)
+const state = reactive({
+  loginForm: {
+    phone: '18971330757',
+    password: 'wyw123456',
+    authCode: '',
+  },
+  isAgreed: false,
+  isPassword: false,
+  msgRef: null as InstanceType<typeof tmMessage> | null,
+  notificationRef: null as InstanceType<typeof tmNotification> | null,
+})
+const { isPassword, msgRef, notificationRef, isAgreed } = toRefs(state)
+const { areaCode } = toRefs(userStore)
+const { phone, password, authCode } = toRefs(state.loginForm)
+const { statusBarHeight } = uni.$tm.u.getWindow()
 const accountInputML = computed(() => {
   return isPassword.value ? 0 : '110rpx'
 })
 
-// 手机区域码
-const { areaCode } = toRefs(useUserStore())
-
 // 验证码倒计时功能
 const { code, codeStatus, countDown } = useCode()
+
+// 表单验证
 
 // 关闭登录页面
 const closeLoginPage = () => {
   uni.navigateBack()
 }
 
-const msg = ref<InstanceType<typeof tmNotification> | null>(null)
-
 // 输入错误提示
 function errorTip(error: string) {
   nextTick(() => {
-    msg.value?.show({ label: error })
+    notificationRef.value?.show({ label: error })
   })
 }
 
-// 验证表单
-const validateForm = (): boolean => {
-  if (!areaCode) {
+const validatePhone = (): boolean => {
+  if (!isAgreed.value) {
+    errorTip('Please agree to the privacy policy')
+    return false
+  }
+
+  if (!areaCode.value) {
     errorTip('Please select the area code')
     return false
   }
 
   if (!uni.$tm.u.isPhone(phone.value)) {
-    errorTip('Please enter the correct phone number.')
+    errorTip('Please enter the correct phone number')
+    return false
+  }
+  return true
+}
+
+// 验证表单
+const validateForm = (): boolean => {
+  if (!validatePhone()) {
     return false
   }
 
-  if (!isPassword.value && authCode.value.length < 6) {
-    errorTip('Please enter the correct verification code.')
+  if (!isPassword.value && authCode.value.length !== 6) {
+    errorTip('Verification code is 6 digits')
+    return false
+  }
+
+  if (isPassword.value && password.value.length < 6) {
+    errorTip('The password cannot be less than 6 characters')
     return false
   }
   return true
 }
 
 // 发送验证码
-const sendCode = () => {
-  const isRight = validateForm()
+const sendCode = async () => {
+  const isRight = validatePhone()
+  console.log('isRight', isRight)
   if (isRight) {
+    const [err] = await userApi.getCode({ phone: phone.value, type: Member, areaCode: +areaCode.value })
+    console.log('err', err)
+    if (err) {
+      return
+    }
+    uni.$tm.u.toast('Sent successfully')
     countDown()
   }
 }
@@ -182,16 +228,26 @@ const handleChooseAreaCode = () => {
 const handleLogin = async () => {
   const isRight = validateForm()
   if (!isRight) return
-  if (isPassword.value) {
+  let res
+  if (state.isPassword) {
     // 密码登录
-    const [err, data] = await userApi.login({ username: phone.value, password: password.value })
-    if (err) {
-      return
-    }
-    userStore.token = data.access_token
+    res = await userApi.login({ phone: phone.value, password: password.value })
   } else {
     // 验证码登录
+    res = await userApi.login({ phone: phone.value, code: authCode.value })
   }
+  const [err, data] = res
+  if (err) {
+    return
+  }
+
+  userStore.token = data.access_token
+  userStore.info = data.user
+
+  msgRef.value?.show({ model: 'success', duration: TIP_DURATION, text: 'Login successful' })
+  setTimeout(() => {
+    uni.navigateBack()
+  }, TIP_DURATION)
 }
 </script>
 
@@ -215,9 +271,5 @@ const handleLogin = async () => {
 
 .send-btn {
   box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.2) !important;
-}
-
-.error-tip {
-  top: calc(env(safe-area-inset-top) + 24rpx) !important;
 }
 </style>

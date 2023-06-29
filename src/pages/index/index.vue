@@ -54,7 +54,6 @@ import { onLoad, onPageScroll, onShow, onUnload } from '@dcloudio/uni-app'
 import IndexBanner from './component/index-banner.vue'
 import IndexHeader from './component/index-header.vue'
 import IndexMerchant from './component/index-merchant.vue'
-import http from '../../api/http'
 
 const listimg = [
   'https://mallkping.oss-ap-southeast-1.aliyuncs.com/def/18984202211231016453160.jpg',

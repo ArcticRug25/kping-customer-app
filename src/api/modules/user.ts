@@ -1,5 +1,5 @@
 import { http } from '../http'
-import { GetAccountInfoModel, LoginParams } from '../model/userModel'
+import { GetAccountInfoModel, LoginParams, SmsParams } from '../model/userModel'
 
 function login(data: LoginParams) {
   return http.post<GetAccountInfoModel>({ url: '/auth/member/signin', data })
@@ -9,14 +9,14 @@ function login(data: LoginParams) {
  * 获取验证码
  * @param phone 手机号
  */
-// function getCode(phone: string): Promise<{ num: number }> {
-//   return http.get('random/code', {
-//     params: {
-//       phone,
-//     },
-//   })
-// }
+function getCode(data: SmsParams) {
+  return http.post({
+    url: '/sms',
+    data,
+  })
+}
+
 export default {
   login,
-  // getCode,
+  getCode,
 }

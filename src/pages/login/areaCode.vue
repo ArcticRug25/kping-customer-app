@@ -1,5 +1,5 @@
 <template>
-  <tm-app class="k-h-full k-pt-safe">
+  <tm-app class="k-h-full" :style="{ paddingTop: statusBarHeight + 'px' }">
     <tm-indexes class="area-code-list">
       <tm-indexes-item
         v-for="(item, index) in hot"
@@ -31,6 +31,7 @@
 import areaList from '@/static/data/list.json'
 
 const { list, hot } = areaList
+const { statusBarHeight } = uni.$tm.u.getWindow()
 
 // 选择手机区号
 const handleSelectAreacode = (item: string) => {

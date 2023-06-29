@@ -1,6 +1,14 @@
 import { defineStore } from 'pinia'
 
+export interface UserInfo {
+  id?: number
+  username?: string
+  email?: string
+  phonenumber?: string
+}
+
 interface UserStore {
+  info: UserInfo
   authTime: number
   areaCode: string
   token: string
@@ -8,6 +16,12 @@ interface UserStore {
 
 export default defineStore('user', {
   state: (): UserStore => ({
+    info: {
+      email: '',
+      phonenumber: '',
+      username: '',
+      id: 0,
+    },
     authTime: 0,
     areaCode: '65',
     token: '',
@@ -16,16 +30,12 @@ export default defineStore('user', {
   actions: {},
   persist: {
     enabled: true,
+    H5Storage: localStorage,
     strategies: [
       {
-        storage: sessionStorage,
-        key: 'authTime',
-        paths: ['authTime'],
-      },
-      {
         storage: localStorage,
-        key: 'token',
-        paths: ['token'],
+        key: 'userAuth',
+        paths: ['authTime', 'token'],
       },
     ],
   },

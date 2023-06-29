@@ -1,6 +1,5 @@
 export const useCode = () => {
   const userStore = useUserStore()
-
   const code = ref(60)
   const codeStatus = ref(false)
   let countDownTimer: any = null
@@ -9,7 +8,6 @@ export const useCode = () => {
     codeStatus.value = true
     countDownTimer = setInterval(() => {
       code.value -= 1
-      userStore.authTime = Date.now()
       if (code.value <= 0) {
         clearInterval(countDownTimer)
         codeStatus.value = false
@@ -20,9 +18,11 @@ export const useCode = () => {
   }
 
   onMounted(() => {
-    if (userStore.authTime && Date.now() - userStore.authTime < 60000) {
+    // 计算验证码倒计时
+    const codeTime = Math.floor((60000 - (Date.now() - userStore.authTime)) / 1000)
+    if (userStore.authTime && codeTime > 0) {
       codeStatus.value = true
-      code.value = Math.floor((60000 - (Date.now() - userStore.authTime)) / 1000)
+      code.value = codeTime
       countDown()
     }
   })
