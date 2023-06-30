@@ -207,11 +207,11 @@ const sendCode = async () => {
   const isRight = validatePhone()
   console.log('isRight', isRight)
   if (isRight) {
-    const [err] = await userApi.getCode({ phone: phone.value, type: Member, areaCode: +areaCode.value })
-    console.log('err', err)
-    if (err) {
-      return
-    }
+    // const [err] = await userApi.getCode({ phone: phone.value, type: Member, areaCode: +areaCode.value })
+    // console.log('err', err)
+    // if (err) {
+    //   return
+    // }
     uni.$tm.u.toast('Sent successfully')
     countDown()
   }

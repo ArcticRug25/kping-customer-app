@@ -24,10 +24,13 @@ export const useCode = () => {
       codeStatus.value = true
       code.value = codeTime
       countDown()
+    } else {
+      userStore.authTime = 0
     }
   })
 
   onUnmounted(() => {
+    console.log('userStore.authTime', userStore.authTime)
     if (userStore.authTime === 0) {
       userStore.authTime = Date.now()
     }
